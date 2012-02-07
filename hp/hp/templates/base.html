@@ -1,0 +1,282 @@
+<!doctype html>
+
+	<head>
+		<title>{% block title %}{% endblock %}</title>
+		
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<meta name="author" content="" />
+		<meta name="MSSmartTagsPreventParsing" content="true" />
+		<meta http-equiv="imagetoolbar" content="no" />
+		<meta name="robots" content="index, follow" />
+		
+		<meta http-equiv='cache-control' content='no-cache'>
+		<meta http-equiv='expires' content='0'>
+		<meta http-equiv='pragma' content='no-cache'>
+
+		<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/screen.css" />
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu:500,300,400,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/scrollable-horizontal.css"/>
+		<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/scrollable-buttons.css"/>
+		<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/overlay-basic.css"/>
+		<link rel="stylesheet" href="{{MEDIA_URL}}css/jquery-alerts.css" type="text/css" media="screen" />
+		<link rel="icon" type="image/png" href="{{MEDIA_URL}}images/favicon.png">
+
+		<script src="http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js"></script>
+		<!-- <script type="text/javascript" src="{{MEDIA_URL}}js/jquery-1.7.min.js"></script> -->
+		<script type="text/javascript" src="{{MEDIA_URL}}js/superfish.js"></script>
+		<script type="text/javascript" src="{{MEDIA_URL}}js/jcarousellite_1.0.1.min.js"></script>
+		<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.cycle.all.min.js"></script>
+		<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="{{MEDIA_URL}}js/jquery-alerts.js"></script>
+		<script type="text/javascript" src="{{ MEDIA_URL }}js/healthpark.js"></script>
+		<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.tabSlideOut.v1.3.js"></script>
+		<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.fancybox-1.3.4.pack.js"></script>
+		<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/jquery.fancybox-1.3.4.css" media="screen" />
+		 <script>
+
+		 $(function(){
+			 $('#email_address').click(function(){
+				 $('#email_address').val('');
+			 });
+			 $('.slide-out-div').tabSlideOut({
+		         tabHandle: '.handle',                     //class of the element that will become your tab
+		         pathToTabImage: '{{ MEDIA_URL }}images/feedback-icon.png', //path to the image for the tab //Optionally can be set using css
+		         imageHeight: '146px',                     //height of tab image           //Optionally can be set using css
+		         imageWidth: '46px',                       //width of tab image            //Optionally can be set using css
+		         tabLocation: 'right',                      //side of screen where tab lives, top, right, bottom, or left
+		         speed: 300,                               //speed of animation
+		         action: 'click',                          //options: 'click' or 'hover', action to trigger animation
+		         topPos: '200px',                          //position from the top/ use if tabLocation is left or right
+		         leftPos: '20px',                          //position from left/ use if tabLocation is bottom or top
+		         fixedPosition: false                      //options: true makes it stick(fixed position) on scroll
+		     });
+			$("#sign_in").fancybox({
+				'width'				: 500,
+				'height'			: 530,
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe',
+				'href'				:'/login/',
+				'autoDimensions'	: false
+			});
+			$("#sign_up").fancybox({
+				'width'				: 500,
+				'height'			: 670,
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe',
+				'href'				:'/signup/',
+				'autoDimensions'	: false
+			});
+			var offset = $(".slide-out-div").offset(); //Sets which element is scrollable. In this case it's the div .sidebar  
+	        var topPadding = 10;  //Set how much top-padding the element has.  
+	        $(window).scroll(function() {  
+	            if ($(window).scrollTop() > offset.top) {  
+	                $(".slide-out-div").stop().animate({   //Sets which element is scrollable. In this case it's the div .sidebar  
+	                    marginTop: $(window).scrollTop() - offset.top + topPadding  
+	                });  
+	            } else {  
+	                $(".slide-out-div").stop().animate({   //Sets which element is scrollable. In this case it's the div .sidebar  
+	                    marginTop: 0  
+	                });  
+	            };  
+	        });  
+
+		 });
+		 function openFancyBox(){
+			 $.fancybox({
+					'width'				: 500,
+					'height'			: 530,
+					'autoScale'			: false,
+					'transitionIn'		: 'none',
+					'transitionOut'		: 'none',
+					'type'				: 'iframe',
+					'href'				:'/login/',
+					'autoDimensions'	: false
+				});
+			 return false;
+		 }
+		  
+		 </script>
+		{% block js %}{% endblock %}
+	</head> 
+
+	<body>
+	{% if request.session.User_id %}
+	<div class="top_bar">
+	<div class="top_bar_inside">
+		<!-- <div class="choose_location">
+			<select>
+				<option>Choose location</option>
+			</select>
+		</div> --><!-- umair commented -->
+		
+		<div class="user_btns">
+			<a href="/phrprofiles" class="btn_dashboard">My Dashboard</a>
+			<a href="/logout/" class="btn_sign_out">Sign out</a>
+			<!-- <a href="javascript:void(0)" class="btn_dashboard">My Dashboard</a> --><!-- umair commented -->
+		</div>
+			
+		<!-- <div class="user_info">
+			<a href="javascript:void(0)" class="link_message">You have <span>2</span> new messages </a>
+			<span class="ico_global"></span>
+			<span class="ico_star"></span>
+			UserName<strong>(245)</strong>
+		</div> --><!-- umair commented -->
+	</div>
+	</div><!--end of top_bar-->
+	{% else %}
+		<div class="top_bar">
+	<div class="top_bar_inside">
+		<div class="user_btns">
+			<a href="javascript:void(0);" class="btn_sign_out" id="sign_in">Sign In</a>
+			<a href="javascript:void(0);" class="btn_sign_out" id="sign_up">Register</a>
+		</div>
+	</div>
+	</div><!--end of top_bar-->
+	{% endif %}
+		
+		<div id="header">
+		<div class="header_inside">
+			<div class="logo"><a href="/"><img src="{{ MEDIA_URL }}images/logo.gif" alt=""></a></div>	
+			<form action="/search/" method = "Post" class="search_form">{% csrf_token %}
+			<fieldset>
+				<input type="text" name ="search_input" class="input_txt">
+				<input type="submit" name ="search_button" class="input_search" value="Search">
+				<!-- <a href="javascript:void(0)" class="btn_advanced">Advanced</a> --><!-- umair commented -->
+			</fieldset>
+			</form>
+			
+			<ul class="nav">
+				<li>
+					<a href="/content/A/" class="lev1">Encyclopedia</a>
+					
+					<!-- <ul>
+						<li><a href="javascript:void(0)">Patient Centers</a></li>
+						<li><a href="javascript:void(0)">Care Guides</a></li>
+						<li><a href="javascript:void(0)">Conditions A-Z</a></li>
+						<li><a href="javascript:void(0)">Tests & Treatments</a></li>
+						<li><a href="javascript:void(0)">Tools</a></li>
+					</ul> -->
+				</li>
+				<li><a href="/content/" class="lev1">Centers</a></li>
+				<li><a href="/allvideo/" class="lev1">Video</a></li>
+				<li><a href="/forum/view-all/" class="lev1">Forum</a></li>
+				<!-- <li><a href="javascript:void(0)" class="lev1">Community</a></li>
+				<li><a href="javascript:void(0)" class="lev1">News</a></li>
+				<li><a href="javascript:void(0)" class="lev1">Videos</a></li>
+				<li><a href="javascript:void(0)" class="lev1">Directories</a></li>
+				<li><a href="javascript:void(0)" class="lev1">Shops</a></li>
+				<li><a href="javascript:void(0)" class="lev1">Help</a></li> -->
+			</ul>
+		</div>
+		
+		</div><!--end of header-->
+		
+		<div>
+		{% if action %}
+		{% ifnotequal action '' %}
+				{% load messages_tag %}
+				{%getMessageContent action 'home' %}
+		{%else%}	
+		{% endifnotequal %}	
+		{% endif %}	
+		</div>
+		{% block content %}{% endblock %}
+		
+		
+		
+		
+		<div id="footer">
+			<div class="footer_row1">
+			<div class="footer_row1_inside">
+				<div class="footer_box1">
+					<div class="foot_col">
+						<div class="foot_title">Health Info</div>
+						<ul class="foot_list">
+							<li><a href="/content/">Patient Centers</a></li>
+							<!-- <li><a href="javascript:void(0)">Care Guides</a></li>
+							<li><a href="javascript:void(0)">Conditions A-Z</a></li>
+							<li><a href="javascript:void(0)">Tests &amp; Treatments</a></li>
+							<li><a href="javascript:void(0)">Tools</a></li> -->
+						</ul>
+						<div class="foot_title">Community</div>
+						<ul class="foot_list">
+							<li><a href="/forum/view-all/">Forums</a></li>
+							<!-- <li><a href="javascript:void(0)">Blogs</a></li> -->
+						</ul>
+						<div class="foot_title">News</div>
+							<ul class="foot_list">
+								<li><a href="/news_feed/">View News</a></li>
+							</ul>
+					</div><!--end of foot_col-->
+					
+					<div class="foot_col">
+					<!-- 	<div class="foot_title">Directory</div>
+						<ul class="foot_list">
+							<li><a href="javascript:void(0)">Add a listing</a></li>
+						</ul>
+						<div class="foot_title">Shops</div>
+						<ul class="foot_list">
+							<li><a href="javascript:void(0)">Sell with us</a></li>
+						</ul>
+						<div class="foot_title">Help</div>
+						<ul class="foot_list">
+							<li><a href="javascript:void(0)">FAQ</a></li>
+							<li><a href="javascript:void(0)">Site Map</a></li>
+						</ul> -->
+						<div class="foot_title">Media</div>
+							<ul class="foot_list">
+								<li><a href="/allvideo/">View Videos</a></li>
+							</ul>
+						<div class="foot_title">Contact Us</div>
+						<ul class="foot_list">
+							<li><a href="/aboutus">About Us</a></li>
+							<!-- <li><a href="javascript:void(0)">Careers</a></li> -->
+						</ul>
+					</div><!--end of foot_col-->
+				</div><!--end of footer_box1-->
+				
+				<div class="footer_box2">
+					<div class="footer_title">About HealthPark.com</div>
+					<p>We are the one stop hub for all things related to keeping you healthy. Start tracking your health online with the help of HealthPark. We want to connect people with their health using technology.</p>
+				</div><!--end of footer_box2-->
+			</div>
+			</div><!--end of footer_row1-->
+			
+			<div class="footer_row2">Copyright &copy; 2011 HealthPark.ca</div>
+			
+		</div><!--end of footer-->
+		<div class="feedback" style="width:475px" id="floatdiv">
+			<div class="slide-out-div" style="height:auto">
+				<a class="handle" href="http://link-for-non-js-users.html" style="margin-top:-2px">Content</a>
+				<p>If you have any comments or suggestions, we would love to hear you! Please submit the form below and let us know what you think.</p>
+					
+					<div class="error_message" id="errors" style="margin:2px 0px 2px 0px; width:300px"><span id="errors_msg">
+						</span></div>
+					<form action="/send_feedback/" method="post" enctype="multipart/form-data" onsubmit="return postFeedFormValidation();">{% csrf_token %}
+					{% load feedback_tag %}
+					{% if request.session.User_id %}
+						{% getFeedbackForm 'true' request.session.User_id request.get_full_path %}
+						<p><br/><br/><div class="line" ></div></p>
+					{% else %}
+						
+						{% getFeedbackForm 'false' '' request.get_full_path %}
+						<p><div class="line" ></div></p>
+						<p>Leave you email if you would like us to get back to you (not required).</p>
+						<p><input type="text" value="email address" id="email_address" class="input_txt" name="email_address"/></p>
+					{% endif %}
+					
+					<p><input type="submit" value="Send" class="input_feedback"/></p>
+					
+					</form>
+
+			</div>
+		</div>
+
+	</body>
+</html>

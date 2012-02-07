@@ -1,0 +1,22 @@
+<html>
+<head>
+<title>Delete Group</title>
+</head>
+<body>
+<h3>Delete Group</h3>
+{{error}}
+<form action="" method="post">{% csrf_token %}
+   <table>
+    <tr><td><div style="overflow: auto; height : 150px;">
+      {{ form.as_p }}
+    </div></td></tr>
+    <tr><td ><input type="submit" value="Delete"/></td></tr>
+  </table>  
+</form>
+<form action="/groupmanager/" method="LINK">
+&nbsp;<input type="submit" value="Back To Group Manager"></br></br>
+</form>
+</body>
+</html>
+
+

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Healthpark::{{MArtical.headerTitle}}{% endblock %}
+{% block js %}
+
+{% endblock %}
+
+
+
+{% block content %}
+<div id="content">
+			<div class="breadcrumb">
+				<a href="#" class="bc1"><strong>home</strong></a>
+				<a href="#" class="bc2">Videos</a>
+			</div>
+
+			
+			<div class="cont_row">
+				<div class="cont_col1">
+					<div class="main_block main_block1">
+						<div class="title_row">
+							<div class="main_title title_video">Videos</div>
+						</div><!--end of title_row-->
+					{%if distinct_category_list%}
+					  {%for category in distinct_category_list%}
+						<div class="video_list_box">
+							<div class="video_list_title">{{category}}</div>
+
+							<ul class="video_list">
+							  {%if MArtical.allvideo_list%}
+							   {%for video in MArtical.allvideo_list%}
+							     {%ifequal video.videoCategory category%}
+								<li>
+									<a href="/video/?video={{video.videoID}}&text={{video.videoDesc}}">
+										<img src="{{MEDIA_URL }}images/videos/{{video.videoID}}.jpg" alt="">
+										<span>{{video.videoDesc}}</span>
+									</a>
+								</li>
+								{%endifequal%}
+								{%endfor%}
+							  {%endif%}
+							</ul>
+						</div><!--end of video_list_box-->	
+					  {%endfor%}
+					{%endif%}
+						
+						
+						
+						<!-- <div class="video_list_box">
+							<div class="video_list_title">Life with a Newborn</div>
+							<ul class="video_list">
+								<li>
+
+									<a href="#">
+										<img src="images/videos/video38.jpg" alt="">
+										<span>Breast Engorgement</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="images/videos/video39.jpg" alt="">
+
+										<span>Storing Breast Milk</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="images/videos/video40.jpg" alt="">
+										<span>Treating Congestion In Babies</span>
+									</a>
+
+								</li>
+							</ul>
+						</div>--><!--end of video_list_box-->
+						
+							
+					</div><!--end of main_block1-->	
+				
+				</div><!--end of cont_col1-->
+				
+
+				<!-- <div class="cont_col2">
+					<div class="ad1"><a href="#"><img src="{{MEDIA_URL }}images/media/ad4.gif" alt=""></a></div>
+					<div class="ad1"><a href="#"><img src="{{MEDIA_URL }}images/media/ad4.gif" alt=""></a></div>
+					<div class="ad1"><a href="#"><img src="{{MEDIA_URL }}images/media/ad1.gif" alt=""></a></div>
+
+				</div>--><!--end of cont_col2-->
+				
+				<br class="cl">
+				
+			</div><!--end of cont_row-->
+</div><!--end of content-->		
+
+{% endblock %}

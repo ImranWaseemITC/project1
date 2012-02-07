@@ -1,0 +1,72 @@
+{% extends "news.html" %}
+
+{% load feeds_tags %}
+
+{% block sidebar %}
+<div class="sidebar2">
+	<div class="side_box3">
+		<div class="side_title2">Recently Viewed</div>
+		<ul class="recently_viewed_list">
+		{% for recent_news in items.recently_viewed %}
+	<a href="/read_news/{{recent_news.id}}/" target="_blank">
+			<li><span>{{recent_news.datetime_created}}</span>
+			{{recent_news.title|truncatesmart:75|safe}}</li>
+	</a>
+		{% endfor %}
+			<!-- <li><span>Tags - <a href="javascript:void(0)">Type 2 Diabetes</a></span><a href="javascript:void(0)">Non proident, sunt in culpa qui officia deserunt mollit...</a></li> -->
+		</ul>
+	</div><!--end of side_box3-->
+	
+</div><!--end of sidebar2-->
+
+{% endblock %}
+
+
+{% block disp_news_items %}
+
+{% for item in items.news_items %}
+<div class="single_news">
+	<div class="news_img">
+	{% comment %}
+		<a href="/read_news/{{item.id}}/" target="_blank"><img src="{{MEDIA_URL}}images/media/news2.png" alt="" ></a>
+	{% endcomment %}		
+	</div>
+	<div class="news_txt">
+	<a href="/read_news/{{item.id}}/" target="_blank">
+		{% load math_tags_filters %}
+		{% if item.title|is_greater_than:54 %}
+		<div class="news_title"><p style="font-size:18.5px">{{item.title}}</p></div>
+		{% else %}
+		<div class="news_title">{{item.title}}</div>
+		{% endif %}
+		<div class="news_date">{{item.date}} | About 
+			{% if item.days_ago %} 
+				{{item.days_ago}} days and 
+			{% endif %} 
+			{{item.hours_ago}} hours ago</div>
+		{% if item.by %}
+			<div class="news_info">
+				{{item.by}} <!-- | <a href="javascript:void(0)">Cancer</a>, <a href="javascript:void(0)">Nutrition</a> -->
+			</div>
+		{% else %} <br>
+		{% endif %}
+		{{item.summary|truncatesmart:148|safe}}
+		</a>
+		<div class="news_links">
+			<!-- <a class="link_comment" href="javascript:void(0)"><span>20</span>Comments</a>
+			<div class="share_holder">
+				<a href="javascript:void(0)" class="link">share</a>
+				<div class="share_box share_box2">
+					<a href="javascript:void(0)" class="btn_email">Email</a><b>|</b> <a href="javascript:void(0)"
+						class="btn_facebook">facebook</a> <a href="javascript:void(0)" class="btn_twitter">twitter</a>
+					<a href="javascript:void(0)" class="btn_reddit">reddit</a>
+				</div>
+			</div>  -->
+			<br>
+			<a class="link_more" href="/read_news/{{item.id}}/" target="_blank">Read More</a>
+		</div>
+	</div>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,122 @@
+
+{% extends "base.html" %}
+{% block title %}Healthpark::PHR Profile{% endblock %}
+{% block js %}
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/form.css" />
+{% endblock %}
+{% block content %}
+		<div id="content">
+			
+			
+			<div class="cont_row">
+				<div class="main_box_title">
+				<div class="main_box_title_inside">
+					<strong class="main_title title_encylopedia">Welcome {{ personalProfile.profilename }}!</strong>
+				</div>
+				</div>
+				
+				<div class="main_box main_box5">
+					
+					<div class="main_content3">
+						
+						
+						<div class="links_row">
+							<div class="links_block_profile">
+							<div id="content-inside">
+							<div class="info_view_box">
+								
+								<ul>
+									<li><h1>Personal Profile</h1><a href="/phrprofile?profile={{personalProfile.id}}" class="edit_image"><img alt="Edit Profile" src="{{MEDIA_URL}}images/edti_rec.png"></a></li>
+									<li><span> Profile name:</span>{{ personalProfile.profilename }}</li>
+									<li><span> First name:</span>{{ personalProfile.firstname }}<span>&nbsp;&nbsp;Middle name:</span>{{ personalProfile.middlename }}&nbsp;&nbsp;<span>Last name:</span>{{ personalProfile.lastname }}</li>
+									<li><span> Date Of Birth:</span>{{ personalProfile.dob }}</li>
+									<li><span> Sex:</span>{{ personalProfile.sex }}</li>
+									<li><span> Blood type:</span>{{ personalProfile.bloodtype }}</li>
+									<li><span> Ethinicity:</span>{{ personalProfile.ethinicity }}</li>
+									<li><span> Phone:</span>{{ personalProfilePhone.phone }}&nbsp;&nbsp;<span>Phone type:</span>{{ personalProfilePhone.phonetype }}</li>
+									<li><span> E-mail:</span>{{ personalProfileEmail.email }}&nbsp;&nbsp;<span>E-mail type:</span>{{ personalProfileEmail.emailtype }}</li>
+									<li><span> Adress:</span>{{ personalProfileAdress.adress }}&nbsp;&nbsp;<span>Adress type:</span>{{ personalProfileAdress.adresstype }}</li>
+								</ul>
+							</div>
+							<div class="info_view_box">
+								<ul>
+									<li ><h1>Family History</h1><a href="/phrprofile?familyprofile={{personalProfile.id}}"><img alt="Add Profile" src="{{MEDIA_URL}}images/add.png"></a></li>
+									{% for id, condition, period, gender, relation, relationshipType in familyHistory %}
+									<li><a href="/phrprofile?familyprofile={{personalProfile.id}}&familyrecord={{id}}"><img alt="Edit Profile" src="{{MEDIA_URL}}images/edti_rec.png"></a></li>
+									<li><span> Condition:</span>&nbsp;{{ condition }}</li><li><span>Period:</span>&nbsp;{{ period }}</li><li><span>Gender:</span>&nbsp;{{ gender }}</li>
+									<li><span> Relationship:</span>&nbsp;{{ relation }}</li><li><span>Relationship type:</span>&nbsp;{{ relationshipType }}</li>
+									</br></br>
+
+									{% endfor %}
+								</ul>
+							</div>
+							<div class="info_view_box">
+								<ul>
+									<li ><h1>Emergency Contacts</h1><a href="/phrprofile?contactprofile={{personalProfile.id}}"><img alt="Add Profile" src="{{MEDIA_URL}}images/add.png"></a></li>
+									{% for id, firstname, middlename, lastname, relationship in emergencyContacts %}
+									<li><a href="/phrprofile?contactprofile={{personalProfile.id}}&contactrecord={{id}}"><img alt="Edit Profile" src="{{MEDIA_URL}}images/edti_rec.png"></a></li>
+									<li><span> First name:</span>{{ firstname }}&nbsp;&nbsp;<span>Middle name:</span>{{ middlename }}&nbsp;&nbsp;<span>Last name:</span>{{ lastname }}</li>
+									<li><span> Relationship:</span>{{ relationship }}</li>
+									
+									{% for myid, phone, phonetype, emergencycontacts in emergencyContactsPhone %}
+									{% ifequal emergencycontacts id %}
+									<li><span> Phone:</span>{{ phone }}&nbsp;&nbsp;<span>Phone type:</span>{{ phonetype }}</li>
+									{% endifequal %}
+									{% endfor %}
+									
+									{% for myid, email, emailtype, emergencycontacts in emergencyContactsEmail %}
+									{% ifequal emergencycontacts id %}
+									<li><span> E-mail:</span>{{ email }}&nbsp;&nbsp;<span>E-mail type:</span>{{ emailtype }}</li>
+									{% endifequal %}
+									{% endfor %}
+									
+									{% for myid, adress, adresstype, emergencycontacts in emergencyContactsAdress %}
+									{% ifequal emergencycontacts id %}
+									<li><span> Adress:</span>{{ adress }}&nbsp;&nbsp;<span>Adress type:</span>{{ adresstype }}</li>
+									{% endifequal %}
+									{% endfor %}
+									{% endfor %}
+								</ul>
+							</div>
+							<div class="info_view_box">
+								<ul>
+									<li ><h1>Social History</h1><a href="/phrprofile?socialprofile={{personalProfile.id}}"><img alt="Edit Profile" src="{{MEDIA_URL}}images/edti_rec.png"></a></li>
+									<li><span> Marital Status:</span>{{ socialHistory.maritalstatus }}</li>
+									<li><span> Work conditions:</span>{{ socialHistory.workconditions }}</li>
+									<li><span> Drug use:</span>{{ socialHistory.druguse }}</li>
+									<li><span> Physical activity:</span>{{ socialHistory.physicalactivity }}</li>
+                                    
+								    </ul>
+								</div>
+								</div>
+								<div id="inner_content_forms" style="padding:0px 0px 20px 0px;">		
+								<div id="formFields">
+								<ul>
+										<form action="" method="POST">{% csrf_token %}
+										<li><input type="hidden" value="{{ personalProfile.id }}" name = "currentprofile"></li>
+										<li><input type="submit" value="Delete Profile" name = "deleteprofile"></li>
+										</form>
+								</ul>
+								</div>
+								</div>
+							</div><!--end of links_block-->
+							
+						</div><!--end of links_row-->
+						
+					</div><!--end of main_content3-->
+					
+					<!-- <div class="sidebar3">
+						<div class="ad6"><a href="#"><img src="{{MEDIA_URL}}images/media/ad2.gif" alt=""></a></div>
+					</div> --><!--end of sidebar3-->
+					
+					<div class="cl"></div>
+				</div><!--end of main_box5-->
+				
+				
+				<br class="cl">
+				
+			</div><!--end of cont_row-->
+		
+		</div><!--end of content-->
+
+	{% endblock %}

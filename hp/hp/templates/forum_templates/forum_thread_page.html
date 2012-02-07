@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Healthpark::Forum Posts{% endblock %}
+
+{% block content %}
+
+		<div id="content">
+		<div id="fb-root"></div>
+			 <div class="breadcrumb">
+				
+				<a href="/" class="bc1"><strong>home</strong></a>
+				
+			</div> 		
+			<br class="cl">
+			<div class="main_content">
+				<div class="main_block">
+					<div class="title_row">
+						<div class="main_title title_forum">Forum Posts</div>
+						<ul class="btns_list">
+							<!-- <li class="on"><a href="javascript:void(0)">Most Popular<span>&nbsp;</span></a></li>
+							<li><a href="javascript:void(0)">Most Discussed<span>&nbsp;</span></a></li>
+							<li><a href="javascript:void(0)">Most Recent<span>&nbsp;</span></a></li>-->
+							<li class="on" id="most_popular_forum">Most Popular<span id="popular_nav_forum">&nbsp;</span></li>
+							<li  id="most_discussed_forum">Most Discussed</li>
+							<li  id="most_recent_forum">Most Recent</li>
+							
+						</ul>
+					</div><!--end of title_row-->
+					
+					<div class="forum_box">
+							<div id="forum_content">
+								{% load forum_tag %}
+								{% getForumActivityContent 'none' user_isLogged owner '' %}
+							</div><!--end of forum_content-->
+					</div><!--end of forum_box-->
+					
+					<div class="see_more"><span id="see_more">See More <span id="see_more_arrow">&nbsp;</span></div>
+					
+				</div><!--end of main_block-->
+			</div><!--end of main_content-->
+			
+			
+			<div class="sidebar">
+				<div class="side_box2">
+					
+					<div class="side_title2">Categories <span class="view_more"><a href="/forum/" title="View More Categories"><img src="{{MEDIA_URL}}/images/icon_viewMore.gif"/></a></span></div>
+					<ul class="fcate_list">
+						<!--<li>
+							 <a href="javascript:void(0)" class="has_sub">Diabetes</a>
+							<ul>
+								<li><a href="javascript:void(0)">Type 1 diabetes</a></li>
+								<li><a href="javascript:void(0)">Type 2 diabetes</a></li>
+							</ul>
+						</li>-->
+						{% load forum_tag %}
+						{% getCategories user_isLogged owner '' '' '' '' %}	
+					</ul>
+					<span class="view_more_link"><a href="/forum/" title="View More Categories">View More</a></span>
+				</div><!--end of side_box2-->
+				
+				
+				
+				
+				<div class="ad2"><a href="javascript:void(0);"><img src="{{MEDIA_URL}}images/media/ad2.gif" alt="" height="200px" width="159px"></a></div>
+			</div><!--end of sidebar-->
+			<br class="cl">
+			<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+		</div><!--end of content-->
+				
+
+{% endblock %}

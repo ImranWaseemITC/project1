@@ -1,0 +1,47 @@
+
+{% extends "base.html" %}
+{% block title %}Healthpark::content{% endblock %}
+{% block content %}
+		<div id="content">
+			
+			
+			<div class="cont_row">
+				<div class="main_box_title">
+				<div class="main_box_title_inside">
+					<strong class="main_title title_encylopedia">Centers</strong>
+				</div>
+				</div>
+				
+				<div class="main_box main_box5">
+					
+					<div class="main_content3">
+						
+						
+						<div class="links_row">
+							<div class="links_block">
+								<ul>
+									{% for key,eachcenter in centers %}
+										<li><a href="/content?center={{key}}">{{ key }}</a></li>
+                                    {% endfor %}
+								</ul>
+							</div><!--end of links_block-->
+							
+						</div><!--end of links_row-->
+						
+					</div><!--end of main_content3-->
+					
+					<!-- <div class="sidebar3">
+						<div class="ad6"><a href="#"><img src="{{MEDIA_URL}}images/media/ad2.gif" alt=""></a></div>
+					</div> --><!--end of sidebar3-->
+					
+					<div class="cl"></div>
+				</div><!--end of main_box5-->
+				
+				
+				<br class="cl">
+				
+			</div><!--end of cont_row-->
+		
+		</div><!--end of content-->
+
+	{% endblock %}

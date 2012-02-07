@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+{% block title %}Healthpark::{{MArtical.headerTitle}}{% endblock %}
+{% block js %}
+
+<script src="{{MEDIA_URL }}flowplayerjs/flowplayer-3.2.6.min.js"></script>
+
+
+{% endblock %}
+
+{% block content %}
+
+<div id="content">
+			<div class="breadcrumb">
+				<a href="#" class="bc1"><strong>home</strong></a>
+				<a href="#" class="bc2">Videos</a>
+			</div><!-- end of breadcrumb div -->
+			<div class="cont_row">
+				<div class="cont_col1">
+					<div class="main_box_title">
+					<div class="main_box_title_inside">
+						<div class="main_title">{{video_text}}</div>
+
+					</div>
+					</div>
+					
+					<div class="main_box">
+						<div class="video">
+						<a 
+							href="{{MEDIA_URL }}graphics/multimedia/en/{{video}}/{{video}}.flv" 
+							style="display:block;width:425px;height:300px;" 
+							id="player">
+						</a>
+						<script language="JavaScript">
+							  flowplayer("player", "{{MEDIA_URL }}flowplayerswf/flowplayer-3.2.7.swf", {
+								
+								
+								
+								// clip properties 
+								clip: {
+									
+									// these two settings will make the first frame visible
+									autoPlay: false,
+									autoBuffering: true,
+									
+									// locate a good looking first frame with the start parameter
+									start: 62,
+									
+									
+															
+									
+									// this is our video file. our server supports pseudostreaming
+									url: '{{MEDIA_URL }}graphics/multimedia/en/{{video}}/{{video}}.flv'		
+								}  
+								
+							});
+						</script>
+						<!-- <img src="images/media/video.jpg" alt="">-->
+						</div>
+						
+						<div class="useful_holder useful_holder2">
+							<div class="share_holder">
+								<a href="#" class="btn_share">share</a>
+								<span class="link_share">share</span>
+
+								<div class="share_box">
+									<a href="#" class="btn_email">Email</a><b>|</b>
+									<a href="#" class="btn_facebook">facebook</a>
+									<a href="#" class="btn_twitter">twitter</a>
+									<a href="#" class="btn_reddit">reddit</a>
+								</div>
+
+							 </div>
+							 
+							<div class="useful_txt">
+								<div class="uf_title">Did you find this article helpful?</div>
+								<p>23 of 23 people found this article helpful</p>
+							</div>
+							<div class="useful_btns">
+								<a href="#" class="btn_yes">yes</a>
+
+								<a href="#" class="btn_no">no</a>
+								<a href="#" class="link_feedback">Give us detailed feedback</a>
+							</div>
+							<div class="cl"></div>
+						</div><!--end of useful_holder-->
+						
+						<!-- ><div class="related_row">
+							<div class="related_col1">
+								<div class="side_title">Related Forum Topics</div>
+
+								
+								<ul class="related_articles_list">
+									<li><a href="#">Diabetes mellitus type 2 in adults Diabetes mellitus type 2 in adults</a><span>(Alt. Medicine)</span></li>
+									<li><a href="#">Type 2 diabetes - self care</a><span>(Self-Care)</span></li>
+									<li><a href="#">Managing your blood sugar</a><span>(Self-Care)</span></li>
+									<li><a href="#">Type 2 diabetes</a><span>(Condition)</span></li>
+
+									<li><a href="#">Diabetes type 1 glossary</a><span>(Care Guide)</span></li>
+									<li><a href="#">Type 2 diabetes - self care</a><span>(Self-Care)</span></li>
+									<li><a href="#">Diabetes type 1 glossary</a><span>(Care Guide)</span></li>
+									<li><a href="#">Managing your blood sugar</a><span>(Self-Care)</span></li>
+								</ul>
+
+							</div>
+							
+							
+							<div class="related_col2">
+								<div class="side_title">Related Articles</div>
+								
+								<div class="activity_holder">
+									<div class="single_activity">
+										<div class="activity_btn">
+											<a class="btn_up" href="#">btn_up</a>
+											<span>167</span>
+
+											<a class="btn_down" href="#">btn_down</a>
+										</div>
+										
+										<div class="activity_txt">
+											<div class="act_info"><a href="#">Fugiat Nulla</a> | Tags - <a href="#">Cancer, General Info</a></div>
+											<p><a href="#">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui...</a></p>
+											<div class="act_link">
+
+												<a class="link_comment" href="#"><span>20</span> Comments</a>
+												<div class="share_holder">
+													<a href="#" class="link">share</a>
+													<div class="share_box share_box2">
+														<a href="#" class="btn_email">Email</a><b>|</b>
+														<a href="#" class="btn_facebook">facebook</a>
+
+														<a href="#" class="btn_twitter">twitter</a>
+														<a href="#" class="btn_reddit">reddit</a>
+													</div>
+												 </div>
+											</div>
+										</div>
+									</div><!--end of single_activity-->
+									
+									<!-- <div class="single_activity">
+
+										<div class="activity_btn">
+											<a class="btn_up" href="#">btn_up</a>
+											<span>78</span>
+											<a class="btn_down" href="#">btn_down</a>
+										</div>
+										
+										<div class="activity_txt">
+											<div class="act_info"><a href="#">Fugiat Nulla</a> | Tags - <a href="#">Cancer, General Info</a></div>
+
+											<p><a href="#">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui...</a></p>
+											<div class="act_link">
+												<a class="link_comment" href="#"><span>20</span> Comments</a>
+												<div class="share_holder">
+													<a href="#" class="link">share</a>
+													<div class="share_box share_box2">
+
+														<a href="#" class="btn_email">Email</a><b>|</b>
+														<a href="#" class="btn_facebook">facebook</a>
+														<a href="#" class="btn_twitter">twitter</a>
+														<a href="#" class="btn_reddit">reddit</a>
+													</div>
+												 </div>
+
+											</div>
+										</div>
+									</div><!--end of single_activity-->
+								<!-- </div><!--end of activity_holder-->
+							<!-- </div>
+						</div>-->
+					</div>
+						
+					
+					<div class="cl"></div>
+				</div><!--end of cont_col1-->
+
+				
+				
+				
+				<!-- <div class="cont_col2">
+					<div class="ad1"><a href="#"><img src="{{MEDIA_URL }}images/media/ad4.gif" alt=""></a></div>
+				</div>--><!--end of cont_col2-->
+				
+				<br class="cl">
+				
+			</div><!--end of cont_row-->
+</div><!--end of content-->			
+{% endblock %}

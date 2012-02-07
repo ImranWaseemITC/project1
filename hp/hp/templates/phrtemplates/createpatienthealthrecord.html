@@ -1,0 +1,21 @@
+<html>
+<head>
+<title>Create Patient Health Record</title>
+</head>
+<body>
+<h3>Create Patient Health Record</h3>
+{% if errors %}
+<ul>
+{% for error in errors %}
+<li>{{ error }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+<form action="" method="post">{% csrf_token %}
+<table>
+{{ form.as_table }}
+</table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Create">
+</form>
+</body>
+</html>

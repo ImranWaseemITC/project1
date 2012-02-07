@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>new tool</title>
+
+<!-- include the Tools -->
+<script src="http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js"></script>
+
+<!-- standalone page styling (can be removed) -->
+<link rel="stylesheet" type="text/css"
+	href="{{ MEDIA_URL }}css/standalone.css">
+<link rel="stylesheet" type="text/css"
+	href="{{ MEDIA_URL }}css/scrollable-horizontal.css">
+<link rel="stylesheet" type="text/css"
+	href="{{ MEDIA_URL }}css/scrollable-buttons.css">
+<link rel="stylesheet" type="text/css"
+	href="{{ MEDIA_URL }}css/overlay-basic.css">
+
+<style>
+/* some styling for triggers */
+#triggers {
+	text-align: center;
+}
+
+#triggers img {
+	cursor: pointer;
+	margin: 0 5px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	padding: 2px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+</style>
+
+</head>
+
+<body>
+
+	<!-- HTML structures -->
+	<!-- "previous page" action -->
+	<a class="prev browse left disabled"></a>
+	<!-- root element for scrollable -->
+	<div class="scrollable">
+		<!-- root element for the items -->
+		<div class="items">
+
+			<div >
+				{% for image in imagelist %} 
+				<img
+					src="{{ MEDIA_URL }}graphics/images/en/{{image}}"
+					rel="#{{forloop.counter}}" /> 
+					{% if forloop.counter|divisibleby:"3"%}
+			</div>
+			<div>{% endif %}
+			 {% endfor %}</div>
+
+
+		</div>
+	</div>
+
+	<!-- overlays -->
+	{%for image in imagelist%}
+	<div class="simple_overlay" id="{{forloop.counter}}">
+		<a class="close"></a> 
+		<img
+			src="{{ MEDIA_URL }}graphics/images/en/{{image}}" width="300px"
+			height="200px">
+	</div>
+	{%endfor%}
+
+
+	<!-- "next page" action -->
+	<a class="next browse right"></a>
+	<br clear="all">
+	<!-- javascript coding -->
+	<script>
+// execute your scripts when the DOM is ready. this is mostly a good habit
+$(function() {
+	// initialize scrollable
+	$(".scrollable").scrollable();
+    $("img[rel]").overlay();
+});
+</script>
+</body>
+</html>

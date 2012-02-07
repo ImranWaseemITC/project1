@@ -1,0 +1,26 @@
+{% load feeds_tags %}
+{% parse_feed items 2 %}
+
+	{% for item in items.news_items %}
+		<div class="news_block1">
+		{% comment %}
+			<div class="news_img"><a href="/read_news/{{item.id}}/" target="_blank"><img src="{{MEDIA_URL}}images/media/news3.png" alt=""></a></div>
+		{% endcomment %}
+			<div class="news_title" style="height:60px"><a href="/read_news/{{item.id}}/" target="_blank">{{item.title}}</a></div>
+			<div class="news_infor" >
+					<span>{{item.date}}</span>
+					{% if item.by %}
+			 			{{item.by}}
+					{% else %} <br>
+					{% endif %}
+			</div>
+			<div style="height:100px">
+			<a href="/read_news/{{item.id}}/" target="_blank"><p>{{item.summary|truncatesmart:148|safe}}</p></a>
+			</div>
+			</a>
+			<div class="news_links">
+				<!-- <a class="link_comment" href="javascript:void(0)"><span>20</span>Comments</a> -->
+				<a class="link_more" href="/read_news/{{item.id}}/" target="_blank">Read More</a>
+			</div>
+		</div><!--end of news_block1-->
+	{% endfor %}

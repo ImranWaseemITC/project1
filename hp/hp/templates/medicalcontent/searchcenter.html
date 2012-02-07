@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Healthpark::content{% endblock %}
+{% block content %}		
+	<div id="content">
+	
+	    {% if errors %}
+		  <div class="info_box">
+			{% for error in errors %}
+				<p class="p_note">
+				{{ error }}
+				</p>
+			{% endfor %}
+		  </div>
+		{% endif %}
+		
+			                                                                                               
+			
+			
+			<div class="cont_row">
+				<div class="main_box_title">
+				<div class="main_box_title_inside">
+					<strong class="main_title title_encylopedia">Search Result</strong>
+				</div>
+				</div>
+				
+				<div class="main_box main_box5">
+					
+					<div class="main_content3">
+						
+						
+						
+						
+						
+						
+						<div class="injuries_list_holder">
+						 {% if search_record1 %}
+							<ul class="inj_list1">
+							   {% for center,area,articleheader,articletitle,searchedarticleheader,targeturl in search_record1 %}
+								 <li>
+									<a href="/adamcontent{{targeturl}}/" class="ADAMTitleListText">{{articletitle}}</a>
+								 {% if area %}
+								 ({{area}})</li>
+								 {% endif%}
+							     {% if not area %}
+								 ({{center}})</li>
+								 {% endif %}
+							   {%endfor%} 
+						 {%endif%}	   
+							     {% if not search_record1 %}
+									<li><h5>No result found</h5></li>									
+								 {% endif%}
+							   
+							</ul>
+							
+						 {% if search_record2 %}	
+							<ul>
+							  {% for center,area,articleheader,articletitle,searchedarticleheader,targeturl in search_record2%}
+								 <li>
+									<a href="/adamcontent{{targeturl}}/" class="ADAMTitleListText">{{articletitle}}</a>
+								 {% if area %}
+								 ({{area}})</li>
+								 {% endif%}
+							     {% if not area %}
+								 ({{center}})</li>
+								 {% endif %}
+							   {%endfor%} 
+						 	{%endif%}	   
+							     
+							    
+							</ul>
+						</div>
+
+					</div><!--end of main_content3-->
+					
+					<div class="cl"></div>
+				</div><!--end of main_box5-->
+				
+				
+				<br class="cl">
+				
+			</div><!--end of cont_row-->
+		
+		</div><!--end of content-->	
+		
+{% endblock %}		
+

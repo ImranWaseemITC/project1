@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Healthpark::Edit Category{% endblock %}
+{% block js %}
+	
+	<script type="text/javascript">
+				$(document).ready( function(){
+					//dropmenu
+					$('.nav').superfish();
+	
+					//slider
+					$("#user_slider").jCarouselLite({
+						btnPrev: ".user_prev",
+						btnNext: ".user_next",
+						easing: "easeInOutExpo",
+						speed: 400,
+						//auto: 5000,
+						visible: 5,
+						scroll: 1
+					});
+					
+					
+					//side title toggle
+					$('.side_title').click( function(){
+						$(this).toggleClass('side_title_on');
+						$(this).next().slideToggle(300);
+					});
+					
+					
+					
+				});
+	</script>
+{% endblock %}
+
+{% block content %}
+
+<div id="content">
+			<div class="breadcrumb">
+				
+				<a href="/" class="bc1"><strong>home</strong></a>
+				<span class="bc5"><a href="/forum/" class="bc2">Community</a></span>
+				<span class="bc5" title="{{category_name}}" >{{category_name}}</span>
+			</div>
+			
+			
+			<div class="cont_row">
+				<div class="cont_col1">
+					<div class="main_box_title">
+					<div class="main_box_title_inside">
+						<strong>Edit Category</strong>
+					</div>
+					</div>
+					
+					<div class="main_box">
+						<br/><br/><br/>
+						<div class="error_message" id="errors"><span id="errors_msg"></span></div>
+						<div class="para">
+							{% if dberror %}
+							<p style = "color:red">Could not change this category.</p>
+							{%endif%}
+							{% if emptyCategory %}
+							<p style = "color:red">Please Enter Category Name.</p>
+							{%endif%}
+							<form action="" method="post" onsubmit="return categoryFormValidation();">{% csrf_token %}
+							{{editTopicForm.as_p}}
+							</br>
+							<input type="submit" value="Edit Category" class="input_submit">
+							</form>
+							
+						</div><!--end of para-->
+
+						<div class="cl"></div>
+					</div><!--end of main_box-->
+					
+				</div><!--end of cont_col1-->
+				
+				
+				
+				<div class="cont_col2">
+					<div class="ad1"><a href="javascript:void(0)"><img src="{{ MEDIA_URL }}images/media/ad1.gif" alt=""></a></div>
+				</div><!--end of cont_col2-->
+				
+				<br class="cl">
+				
+			</div><!--end of cont_row-->
+		
+		</div><!--end of content-->
+		
+{% endblock %}

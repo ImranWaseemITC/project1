@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block js %}		
+		<script type="text/javascript">
+			$(document).ready( function(){
+				//dropmenu
+				$('.nav').superfish();
+
+				//fcate accordion
+				$('.fcate_list a.has_sub').click( function(){
+					$(this).toggleClass('has_sub_on');
+					$(this).next().slideToggle(300);
+					return false;
+				});
+				
+				
+			});
+		</script>
+{% endblock %}
+
+{% block content %}
+		<div id="content">
+			<div class="breadcrumb">
+				<a href="#" class="bc1"><strong>home</strong></a>
+				<span class="bc2">Advanced Search</span>
+			</div>
+			
+			<div class="cont_row">
+				<p style='color:red; font-size:30px'>Coming Soon</p>
+				<div class="main_box_title">
+				<div class="main_box_title_inside">
+					<div class="main_title title_adv_search">Advanced Search</div>
+				</div>
+				</div>
+				
+				<div class="search_box">
+					<form action="#" class="adv_search_form">
+					<fieldset>
+						<div class="form_block">
+							<label class="title_label">Search terms:</label>
+							<input type="text" class="input_keyword" value="Pain in my left shoulder">
+							<div class="option">
+								<input type="radio" name="words_type" id="w_type1">
+								<label for="w_type1">All these words</label>
+								<input type="radio" name="words_type" id="w_type2">
+								<label for="w_type2">Exact words or phrase</label>
+							</div>
+						</div>
+						
+						<div class="form_block">
+							<label class="title_label">Exclude pages with thses words:</label>
+							<input type="text" class="input_txt2">
+						</div>
+						
+						<div class="form_block">
+							<div class="form_col1">
+								<label class="title_label">Search in section:</label>
+								<select>
+									<option>All of HealthPark</option>
+								</select>
+							</div>
+							<div class="form_col2">
+								<label class="title_label">Sort results by:</label>
+								<select>
+									<option>Relevance</option>
+								</select>
+							</div>
+							<div class="cl"></div>
+						</div>
+						
+						
+						<div class="form_block">
+							<label class="title_label">Search in:</label>
+							<div class="option">
+								<input type="checkbox">
+								<label>English</label>
+								<input type="checkbox">
+								<label>Francais</label>
+								<input type="checkbox">
+								<label>Espanol</label>
+							</div>
+						</div>
+						
+						<input type="submit" class="input_submit" value="Search">
+						
+					</fieldset>
+					</form>
+				</div><!--end of search_box-->
+			
+				<br class="cl">
+				
+			</div><!--end of cont_row-->			
+		
+		</div><!--end of content-->
+
+{% endblock %}

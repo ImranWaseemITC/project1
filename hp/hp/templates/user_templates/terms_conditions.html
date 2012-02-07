@@ -1,0 +1,608 @@
+<!doctype html>
+
+	<head>
+		<title>HealthPark.ca</title>
+		
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<meta name="author" content="" />
+		<meta name="MSSmartTagsPreventParsing" content="true" />
+		<meta http-equiv="imagetoolbar" content="no" />
+		<meta name="robots" content="index, follow" />
+
+		<link rel="stylesheet" type="text/css" href="css/screen.css" />
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu:500,300,400,700' rel='stylesheet' type='text/css'>
+
+		<script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+		<script type="text/javascript" src="js/superfish.js"></script>
+		<script type="text/javascript" src="js/jquery.cycle.all.min.js"></script>
+		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready( function(){
+				//dropmenu
+				$('.nav').superfish();
+				
+				$('.article_slider ul').before('<div class="article_slider_nav">').cycle({
+					fx: 'scrollHorz',
+					easing: "easeInOutExpo",
+					speed: 500, 
+					timeout: 0,
+					pager: '.article_slider_nav'
+				});
+				
+				//tab
+				var $tabs=$('.ency_tab li');
+				var $tabs_content=$('.ency_box');
+				$tabs_content.hide();
+				$tabs_content.eq(0).show();
+				$tabs.click( function(){
+					$tabs.removeClass('on');
+					$(this).addClass('on');
+					$tabs_content.hide();
+					var order=$('.ency_tab li').index( $(this) );
+					$('.ency_box').eq(order).show();
+					return false;
+				});
+				
+			});
+		</script>
+		
+	</head> 
+
+	<body>
+		<div class="top_bar">
+		<div class="top_bar_inside">
+			<div class="choose_location">
+				<select>
+					<option>Choose location</option>
+				</select>
+			</div>
+			
+			<div class="user_btns">
+				<a href="#" class="btn_sign_out">Sign out</a>
+				<a href="#" class="btn_dashboard">My Dashboard</a>
+			</div>
+			
+			<div class="user_info">
+				<a href="#" class="link_message">You have <span>2</span> new messages </a>
+				<span class="ico_global"></span>
+				<span class="ico_star"></span>
+				UserName<strong>(245)</strong>
+			</div>
+		</div>
+		</div><!--end of top_bar-->
+		
+		<div id="header">
+		<div class="header_inside">
+			<div class="logo"><a href="#"><img src="images/logo.gif" alt=""></a></div>	
+			
+			<form action="#" class="search_form">
+			<fieldset>
+				<input type="text" class="input_txt">
+				<input type="submit" class="input_search" value="Search">
+				<a href="#" class="btn_advanced">Advanced</a>
+			</fieldset>
+			</form>
+			
+			<ul class="nav">
+				<li>
+					<a href="#" class="lev1">Encyclopedia</a>
+					<ul>
+						<li><a href="#">Patient Centers</a></li>
+						<li><a href="#">Care Guides</a></li>
+						<li><a href="#">Conditions A-Z</a></li>
+						<li><a href="#">Tests & Treatments</a></li>
+						<li><a href="#">Tools</a></li>
+					</ul>
+				</li>
+				<li><a href="#" class="lev1">Community</a></li>
+				<li><a href="#" class="lev1">News</a></li>
+				<li><a href="#" class="lev1">Videos</a></li>
+				<li><a href="#" class="lev1">Directories</a></li>
+				<li><a href="#" class="lev1">Shops</a></li>
+				<li><a href="#" class="lev1">Help</a></li>
+			</ul>
+		</div>
+		</div><!--end of header-->
+		
+		
+		
+		
+		
+		<div id="content">	
+			<div class="info_box">
+				<a href="#" class="btn_close">close</a>
+				<p class="p_note">Welcome to HealthPark.ca!  We have matched your location to <strong>Halifax, Nova Scotia.</strong> If this is not correct please change your location using the “choose location” option above.</p>
+			</div>
+			
+			<div class="cont_row">
+				<div class="cont_col1">
+					<div class="title"><h2 class="h_articles"><span>Featured Articles</span></h2></div>
+					
+					<div class="article_slider">
+						<ul>
+							<li>
+								<div class="art_img"><img src="images/media/img_article.gif" width="360" height="269" alt=""></div>
+								<div class="art_txt">
+									<div class="art_title">Soy eaters may have lower rates of lung cancer</div>
+									<div class="art_date">November 17, 2011</div>
+									<div class="art_info">By Andrew M. Seaman | <a href="#">Cancer</a>, <a href="#">Nutrition</a></div>
+									<p>Medicare and Medicaid will cover the cost of infusion associated with Dendreon Corp's prostate cancer vaccine Provenge, the company said on Monday.</p>
+									<div class="art_links">
+										<a href="#" class="link_comment"><span>20</span>Comments</a>
+										<a href="#" class="link_more">Read More</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="art_img"><img src="images/media/img_article.gif" width="360" height="269" alt=""></div>
+								<div class="art_txt">
+									<div class="art_title">Title 2 Soy eaters may have lower rates</div>
+									<div class="art_date">November 17, 2011</div>
+									<div class="art_info">By Andrew M. Seaman | <a href="#">Cancer</a>, <a href="#">Nutrition</a></div>
+									<p>Medicare and Medicaid will cover the cost of infusion associated with Dendreon Corp's prostate cancer vaccine Provenge</p>
+									<div class="art_links">
+										<a href="#" class="link_comment"><span>20</span>Comments</a>
+										<a href="#" class="link_more">Read More</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="art_img"><img src="images/media/img_article.gif" width="360" height="269" alt=""></div>
+								<div class="art_txt">
+									<div class="art_title">Title 2 Soy eaters may have lower rates</div>
+									<div class="art_date">November 17, 2011</div>
+									<div class="art_info">By Andrew M. Seaman | <a href="#">Cancer</a>, <a href="#">Nutrition</a></div>
+									<p>Medicare and Medicaid will cover the cost of infusion associated with Dendreon Corp's prostate cancer vaccine Provenge</p>
+									<div class="art_links">
+										<a href="#" class="link_comment"><span>20</span>Comments</a>
+										<a href="#" class="link_more">Read More</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="art_img"><img src="images/media/img_article.gif" width="360" height="269" alt=""></div>
+								<div class="art_txt">
+									<div class="art_title">Title 2 Soy eaters may have lower rates</div>
+									<div class="art_date">November 17, 2011</div>
+									<div class="art_info">By Andrew M. Seaman | <a href="#">Cancer</a>, <a href="#">Nutrition</a></div>
+									<p>Medicare and Medicaid will cover the cost of infusion associated with Dendreon Corp's prostate cancer vaccine Provenge</p>
+									<div class="art_links">
+										<a href="#" class="link_comment"><span>20</span>Comments</a>
+										<a href="#" class="link_more">Read More</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="art_img"><img src="images/media/img_article.gif" width="360" height="269" alt=""></div>
+								<div class="art_txt">
+									<div class="art_title">Title 2 Soy eaters may have lower rates</div>
+									<div class="art_date">November 17, 2011</div>
+									<div class="art_info">By Andrew M. Seaman | <a href="#">Cancer</a>, <a href="#">Nutrition</a></div>
+									<p>Medicare and Medicaid will cover the cost of infusion associated with Dendreon Corp's prostate cancer vaccine Provenge</p>
+									<div class="art_links">
+										<a href="#" class="link_comment"><span>20</span>Comments</a>
+										<a href="#" class="link_more">Read More</a>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+				</div><!--end of cont_col1-->
+				
+				<div class="cont_col2">
+					<div class="ad1"><a href="#"><img src="images/media/ad1.gif" alt=""></a></div>
+				</div><!--end of cont_col2-->
+				
+				<div class="cl"></div>
+			</div><!--end of cont_row-->
+			
+			
+			<div class="title"><h2 class="h_encylopedia"><span>Encyclopedia</span></h2></div>
+			<div class="ency_holder">
+				<ul class="ency_tab">
+					<li class="on"><a href="#">Conditions &amp; Diseases</a></li>
+					<li><a href="#">Symptoms</a></li>
+					<li><a href="#">Injuries</a></li>
+					<li><a href="#">Poisons</a></li>
+					<li><a href="#">Tests</a></li>
+					<li><a href="#">Surgeries &amp; Procedures</a></li>
+					<li><a href="#">Alternative Medicine</a></li>
+					<li><a href="#">Nutrition</a></li>
+					<li class="last"><a href="#">Drugs</a></li>
+				</ul> 
+				 
+				<div class="ency_box">
+					<form action="#" class="cate_form">
+					<fieldset>
+						<input type="text" value="" class="input_txt">
+						<input type="submit" value="Search this category " class="input_submit">
+					</fieldset>
+					</form>  
+					
+					<a href="#" class="btn_browse">Browse A-Z</a>
+					
+					<div class="ency_cate_box">
+						<div class="ency_cate_block">
+							<a href="#">Abnormal heart rhythms</a>
+							<a href="#">Abnormal menstrual periods</a>
+							<a href="#">Abnormal vaginal bleeding</a>
+							<a href="#">ABO incompatibility</a>
+							<a href="#">Abortion - complete</a>
+						</div>
+						
+						<div class="ency_cate_block">
+							<a href="#">Anemia </a>
+							<a href="#">Anencephaly</a>
+							<a href="#">Aneurysm</a>
+							<a href="#">Angina</a>
+							<a href="#">Campylobacter enteritis</a>
+						</div>
+						
+						<div class="ency_cate_block">
+							<a href="#">Canavan disease</a>
+							<a href="#">Cancer</a>
+							<a href="#">Empyema</a>
+							<a href="#">Encephalitis</a>
+							<a href="#">Encopresis</a>
+						</div>
+						
+						<div class="ency_cate_block">
+							<a href="#">Endemic typhus</a>
+							<a href="#">Endocarditis</a>
+							<a href="#">Granuloma</a>
+							<a href="#">Granulopenia</a>
+							<a href="#">Grass</a>
+						</div>
+						
+						<div class="ency_cate_block last_ency_cate_block">
+							<a href="#">Graves disease</a>
+							<a href="#">Grief</a>
+							<a href="#">Grieving</a>
+							<a href="#">HIV infection</a>
+							<a href="#">Hives</a>
+						</div>
+					</div>  
+				</div><!--end of ency_box-->
+				
+				
+				<div class="ency_box">
+					box content2
+				</div><!--end of ency_box-->
+				
+				<div class="ency_box">
+					box content3
+				</div><!--end of ency_box-->
+				
+				<div class="ency_box">
+					box content4
+				</div><!--end of ency_box-->
+				
+				<div class="ency_box">
+					box content5
+				</div><!--end of ency_box-->
+				
+				<div class="ency_box">
+					box content6
+				</div><!--end of ency_box-->
+				
+				<div class="ency_box">
+					box content7
+				</div><!--end of ency_box-->
+				
+				<div class="ency_box">
+					box content8
+				</div><!--end of ency_box-->
+				
+				<div class="ency_box">
+					box content9
+				</div><!--end of ency_box-->
+				
+			</div><!--end of ency_holder-->
+			
+			
+			
+			<div class="main_content">
+				<div class="main_block">
+					<div class="title_row">
+						<div class="main_title title_forum">Forum Activity</div>
+							<a href="#" class="btn_view">View All News</a>
+						<ul class="btns_list">
+							<li class="on"><a href="#">Most Popular<span>&nbsp;</span></a></li>
+							<li><a href="#">Most Recent<span>&nbsp;</span></a></li>
+						</ul>
+					</div><!--end of title_row-->
+					
+					<div class="forum_box">
+						<div class="cate_box">
+							<div class="cate_title">Active Categories</div>
+							<ul class="cate_list">
+								<li><a href="#">Diabetes</a></li>
+								<li><a href="#">Heart Disease</a></li>
+								<li><a href="#">Cancer</a></li>
+								<li><a href="#">Quitting Smoking</a></li>
+								<li><a href="#">Weight Loss</a></li>
+								<li><a href="#">Pregnancy</a></li>
+								<li><a href="#">Cold &amp; Flu</a></li>
+							</ul>
+						</div>
+						
+						<div class="single_activity">
+							<div class="activity_btn">
+								<a href="#" class="btn_up">btn_up</a>
+								<span>908</span>
+								<a href="#" class="btn_down">btn_down</a>
+							</div>
+							
+							<div class="activity_txt">
+								<div class="act_info"><a href="#">Fugiat Nulla</a> 3 hours ago | Tags - <a href="#">Cancer, General Info</a></div>
+								<p><a href="#">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</a></p>
+								<div class="act_link">
+									<a href="#" class="link_comment"><span>20</span> Comments</a>
+									<a href="#">Share</a>
+									<a href="#">Report</a>              
+								</div>
+							</div>
+						</div><!--end of single_activity-->
+						
+						<div class="single_activity">
+							<div class="activity_btn">
+								<a href="#" class="btn_up">btn_up</a>
+								<span>167</span>
+								<a href="#" class="btn_down">btn_down</a>
+							</div>
+							
+							<div class="activity_txt">
+								<div class="act_info"><a href="#">Fugiat Nulla</a> 3 hours ago | Tags - <a href="#">Cancer, General Info</a></div>
+								<p><a href="#">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</a></p>
+								<div class="act_link">
+									<a href="#" class="link_comment"><span>20</span> Comments</a>
+									<a href="#">Share</a>
+									<a href="#">Report</a>              
+								</div>
+							</div>
+						</div><!--end of single_activity-->
+						
+						<div class="single_activity">
+							<div class="activity_btn">
+								<a href="#" class="btn_up">btn_up</a>
+								<span>78</span>
+								<a href="#" class="btn_down">btn_down</a>
+							</div>
+							
+							<div class="activity_txt">
+								<div class="act_info"><a href="#">Fugiat Nulla</a> 3 hours ago | Tags - <a href="#">Cancer, General Info</a></div>
+								<p><a href="#">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</a></p>
+								<div class="act_link">
+									<a href="#" class="link_comment"><span>20</span> Comments</a>
+									<a href="#">Share</a>
+									<a href="#">Report</a>              
+								</div>
+							</div>
+						</div><!--end of single_activity-->
+						
+						<div class="single_activity">
+							<div class="activity_btn">
+								<a href="#" class="btn_up">btn_up</a>
+								<span>14</span>
+								<a href="#" class="btn_down">btn_down</a>
+							</div>
+							
+							<div class="activity_txt">
+								<div class="act_info"><a href="#">Fugiat Nulla</a> 3 hours ago | Tags - <a href="#">Cancer, General Info</a></div>
+								<p><a href="#">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</a></p>
+								<div class="act_link">
+									<a href="#" class="link_comment"><span>20</span> Comments</a>
+									<a href="#">Share</a>
+									<a href="#">Report</a>              
+								</div>
+							</div>
+						</div><!--end of single_activity-->
+					</div><!--end of forum_box-->
+				</div><!--end of main_block-->
+				
+
+				
+				<div class="main_block">
+					<div class="title_row">
+						<div class="main_title title_news">Health News</div>
+							<a href="#" class="btn_view">View Forums</a>
+						<ul class="btns_list">
+							<li class="on"><a href="#">Most Popular<span>&nbsp;</span></a></li>
+							<li><a href="#">Most Recent<span>&nbsp;</span></a></li>
+						</ul>
+					</div><!--end of title_row-->
+					
+					<div class="news_box">
+						<div class="news_block1">
+							<div class="news_img"><img src="images/media/img_news1.gif" alt=""></div>
+							<div class="news_title"><a href="#">Soy eaters may have lower rates of lung cancer</a></div>
+							<div class="news_infor"><span>November 17, 2011</span> By Andrew M. Seaman - Cancer</div>
+							<p>Medicare and Medicaid will cover the cost of infusion associated with Dendreon Corp's prostate cancer vaccine Provenge,company said on Monday.</p>
+							<div class="news_links">
+								<a class="link_comment" href="#"><span>20</span>Comments</a>
+								<a class="link_more" href="#">Read More</a>
+							</div>
+						</div><!--end of news_block1-->
+						
+						<div class="news_block1">
+							<div class="news_img"><img src="images/media/img_news1.gif" alt=""></div>
+							<div class="news_title"><a href="#">Soy eaters may have lower rates of lung cancer</a></div>
+							<div class="news_infor"><span>November 17, 2011</span> By Andrew M. Seaman - Cancer</div>
+							<p>Medicare and Medicaid will cover the cost of infusion associated with Dendreon Corp's prostate cancer vaccine Provenge,company said on Monday.</p>
+							<div class="news_links">
+								<a class="link_comment" href="#"><span>20</span>Comments</a>
+								<a class="link_more" href="#">Read More</a>
+							</div>
+						</div><!--end of news_block1-->
+						
+						<div class="news_block2_holder">
+							<div class="news_block2">
+								<div class="news_img"><img src="images/media/img_news2.gif" alt=""></div>
+								<div class="news_title"><a href="#">Cholesterol drugs safe, even after a decade of use</a></div>
+								<p>November 22, 2011</p>
+							</div><!--end of news_block2-->
+
+							<div class="news_block2 news_block2_last">
+								<div class="news_img"><img src="images/media/img_news2.gif" alt=""></div>
+								<div class="news_title"><a href="#">Cholesterol drugs safe, even after a decade of use</a></div>
+								<p>November 22, 2011</p>
+							</div><!--end of news_block2-->
+						</div><!--end of news_block2_holder-->
+						
+					</div><!--end of news_box-->
+				</div><!--end of main_block-->
+				
+				<div class="ad3"><a href="#"><img src="images/media/ad3.gif" alt=""></a></div>
+				
+				<div class="main_block">
+					<div class="title_row">
+						<div class="main_title title_video">Videos</div>
+						<a href="#" class="btn_view">View All Videos</a>
+						<ul class="btns_list">
+							<li class="on"><a href="#">Most Popular<span>&nbsp;</span></a></li>
+							<li><a href="#">Most Recent<span>&nbsp;</span></a></li>
+						</ul>
+					</div><!--end of title_row-->
+					
+					<div class="video_box">
+					<ul>
+						<li>
+							<div class="video_img"><img src="images/media/video_img.gif" alt=""><span></span></div>
+							<div class="video_time">3:45</div>
+							<div class="video_title"><a href="#">After your child’s ear tube surgery</a></div>
+						</li>
+						<li>
+							<div class="video_img"><img src="images/media/video_img.gif" alt=""><span></span></div>
+							<div class="video_time">3:45</div>
+							<div class="video_title"><a href="#">After your child’s ear tube surgery</a></div>
+						</li>
+						<li>
+							<div class="video_img"><img src="images/media/video_img.gif" alt=""><span></span></div>
+							<div class="video_time">3:45</div>
+							<div class="video_title"><a href="#">After your child’s ear tube surgery</a></div>
+						</li>
+						<li>
+							<div class="video_img"><img src="images/media/video_img.gif" alt=""><span></span></div>
+							<div class="video_time">3:45</div>
+							<div class="video_title"><a href="#">After your child’s ear tube surgery</a></div>
+						</li>
+					</ul>
+					</div>
+				</div><!--end of main_block-->
+			</div><!--end of main_content-->
+			
+			<div class="sidebar">
+				<div class="user_box">
+					<div class="user_title">Newest Users</div>
+					<div class="user_block">
+						<ul class="user_list">
+							<li><a href="#"><img src="images/media/img_user.gif" alt=""></a><span>Sodpuppet</span></li>
+							<li><a href="#"><img src="images/media/img_user.gif" alt=""></a><span>Malamara</span></li>
+							<li><a href="#"><img src="images/media/img_user.gif" alt=""></a><span>Sonmlm</span></li>
+							<li><a href="#"><img src="images/media/img_user.gif" alt=""></a><span>Sodpuppet</span></li>
+							<li><a href="#"><img src="images/media/img_user.gif" alt=""></a><span>Sodpuppet</span></li>	
+							<li><a href="#"><img src="images/media/img_user.gif" alt=""></a><span>Malamara</span></li>
+							<li><a href="#"><img src="images/media/img_user.gif" alt=""></a><span>Sodpuppet</span></li>
+							<li><a href="#"><img src="images/media/img_user.gif" alt=""></a><span>Malamara</span></li>
+							<li><a href="#"><img src="images/media/img_user.gif" alt=""></a><span>Sonmlm</span></li>
+							<li><a href="#"><img src="images/media/img_user.gif" alt=""></a><span>Sodpuppet</span></li>
+							<li><a href="#"><img src="images/media/img_user.gif" alt=""></a><span>Sodpuppet</span></li>	
+							<li><a href="#"><img src="images/media/img_user.gif" alt=""></a><span>Malamara</span></li>
+						</ul>
+					</div>
+				</div><!--end of user_box-->
+				
+				<div class="ad2"><a href="#"><img src="images/media/ad2.gif" alt=""></a></div>
+			</div><!--end of sidebar-->
+				
+			<br class="cl">
+		
+		</div><!--end of content-->
+		
+		
+		
+		
+		<div id="footer">
+			<div class="footer_row1">
+			<div class="footer_row1_inside">
+				<div class="footer_box1">
+					<div class="foot_col">
+						<div class="foot_title">Health Info</div>
+						<ul class="foot_list">
+							<li><a href="#">Patient Centers</a></li>
+							<li><a href="#">Care Guides</a></li>
+							<li><a href="#">Conditions A-Z</a></li>
+							<li><a href="#">Tests &amp; Treatments</a></li>
+							<li><a href="#">Tools</a></li>
+						</ul>
+						<div class="foot_title">Community</div>
+						<ul class="foot_list">
+							<li><a href="#">Forums</a></li>
+							<li><a href="#">Blogs</a></li>
+						</ul>
+						<div class="foot_title">News</div>
+						<div class="foot_title">Media</div>
+					</div><!--end of foot_col-->
+					
+					<div class="foot_col">
+						<div class="foot_title">Directory</div>
+						<ul class="foot_list">
+							<li><a href="#">Add a listing</a></li>
+						</ul>
+						<div class="foot_title">Shops</div>
+						<ul class="foot_list">
+							<li><a href="#">Sell with us</a></li>
+						</ul>
+						<div class="foot_title">Help</div>
+						<ul class="foot_list">
+							<li><a href="#">FAQ</a></li>
+							<li><a href="#">Site Map</a></li>
+						</ul>
+						<div class="foot_title">Contact Us</div>
+						<ul class="foot_list">
+							<li><a href="#">Careers</a></li>
+						</ul>
+					</div><!--end of foot_col-->
+				</div><!--end of footer_box1-->
+				
+				<div class="footer_box2">
+					<div class="footer_title">About HealthPark.com</div>
+					<p>We are the one stop hub for all things related to keeping you healthy. Start tracking your health online with the help of HealthPark. We want to connect people with their health using technology.</p>
+				</div><!--end of footer_box2-->
+			</div>
+			</div><!--end of footer_row1-->
+			
+			<div class="footer_row2">Copyright &copy; 2011 HealthPark.ca</div>
+			
+		</div><!--end of footer-->
+		
+		
+		
+		
+		
+		<div class="popup_holder">
+			<div class="popup_box">
+				<div class="pop_box_title"><a href="/" class="btn_close">close</a></div>
+				<div class="form_title">Terms &amp; Conditions</div>
+				<div class="pop_cont">
+					<p>These Terms of Service ("Terms") govern your access to and use of the services and Twitter’s websites (the "Services"), and any information, text, graphics, photos or other materials uploaded, downloaded or appearing on the Services (collectively referred to as "Content"). Your access to and use of the Services is conditioned on your acceptance of and compliance with these Terms. By accessing or using the Services you agree to be bound by these Terms.</p>
+					<p>Basic Terms<br>You are responsible for your use of the Services, for any Content you post to the Services, and for any consequences thereof. The Content you submit, post, or display will be able to be viewed by other users of the Services and through third party services and websites (go to the account settings page to control who sees your Content). You should only provide Content that you are comfortable sharing with others under these Terms.</p>
+					<p>Tip What you say on Twitter may be viewed all around the world instantly. You are what you Tweet!</p>
+					<p>You may use the Services only if you can form a binding contract with Twitter and are not a person barred from receiving services under the laws of the United States or other applicable</p>
+				</div><!--end og pop_cont -->
+				<div class="cont_btns">
+					<a href="#" class="btn_disagree"><span>I Disagree</span></a>
+					<a href="#" class="btn_agree"><span>I Agree</span></a>
+				</div>
+			</div><!--end og popup_box -->
+		</div><!--end og popup_holder -->
+		
+		
+		
+		
+	</body>
+</html>

@@ -1,0 +1,205 @@
+ {% extends "base.html" %} 
+ {% block title %}Healthpark::PHR Profile{%endblock %}
+ {% block js %}
+
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/form.css" />
+<script src="{{ MEDIA_URL }}js/jquery.tools.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/mycalendarcontrol.css"/>
+						
+{% endblock %}
+ {% block content %}
+<div id="content">
+	<div class="title">
+		<h2 class="h_encylopedia">
+			<span>PHR Profile</span>
+		</h2>
+	</div>
+
+	<div class="ency_holder">
+	    <form action="" method="post">{% csrf_token %}
+	    <script type="text/javascript">
+			$(document).ready( function(){
+				//dropmenu
+				$('.nav').superfish();
+				
+				$('.article_slider ul').before('<div class="article_slider_nav">').cycle({
+					fx: 'scrollHorz',
+					easing: "easeInOutExpo",
+					speed: 500, 
+					timeout: 0,
+					pager: '.article_slider_nav'
+				});
+				
+				//tab
+				var $tabs=$('.ency_tab li');
+				var $tabs_content=$('.ency_box');
+				$tabs_content.hide();
+				$tabs_content.eq({{num}}).show();
+				/*$tabs.click( function(){
+					$tabs.removeClass('on');
+					$(this).addClass('on');
+					$tabs_content.hide();
+					var order=$('.ency_tab li').index( $(this) );
+					$('.ency_box').eq(order).show();
+					return false;
+				});*/
+				
+			});
+			function get_csrf_token_for_category(subcontent){
+				document.getElementById(subcontent).innerHTML = "{% csrf_token %}";
+			}
+			function deleteActiveCategory(category_id){
+				jConfirm('Are you sure you want to delete this category?', 'Confirmation Box', function(r) {
+					if (r == true && category_id.length > 0){
+						document.location.href ="/forum/deletecategory/"+category_id+"/";
+					}	
+				});
+			}
+			function deletePost(thread_id){
+				jConfirm('Are you sure you want to delete this post?', 'Confirmation Box', function(r) {
+					if (r == true && thread_id.length > 0){
+						document.location.href ="/forum/deletethread/"+thread_id+"/home/";
+					}	
+				});
+			}
+			
+
+</script>
+
+						
+		<ul class="ency_tab">
+			
+			{% ifequal num 0 %}<li class="on"><a href="javascript:void(0)">Personal</a></li>{% endifequal %}
+			{% ifnotequal displaymsgt1 "hideit" %}
+			{% ifequal num 1 %}<li class="on"><a href="javascript:void(0)">Family History</a></li>{% endifequal %}
+			{% ifequal num 2 %}<li class="on"><a href="javascript:void(0)">Emergency Contacts</a></li>{% endifequal %}
+			{% ifequal num 3 %}<li class="on"><a href="javascript:void(0)">Additional Information</a></li>{% endifequal %}
+			{% endifnotequal %}
+		</ul>
+		
+		
+		<div class="ency_box">
+
+			<div class="ency_cate_box">
+				<div class="ency_cate_block_profile">
+				<div id="inner_content_forms" style="padding:0px 0px 20px 0px;">		
+					<div id="formFields">
+					<ul>
+						{% if errors %}
+						<li>{{ errors }}</li>
+						{% endif %}
+						{% ifnotequal displaymsgt1 "hideit" %}
+						<li> {{ displaymsgt1 }}</li>
+						{% endifnotequal %}
+						
+						<li {% ifnotequal displaymsgt1 "hideit" %} style = "display:None" {% endifnotequal %}><span> Profile name</span>{{ form1.profileName }}{{ form1.profileName.errors }}</li>
+						<li><span> First name</span>{{ form1.firstName }}{{ form1.firstName.errors }}</li>
+						<li><span> Middle name</span>{{ form1.middleName }}{{ form1.middleName.errors }}</li>
+						<li><span> Last name</span>{{ form1.lastName }}{{ form1.lastName.errors }}</li>
+						<li ><span> Date Of Birth</span>{{ form1.dob }}{{ form1.dob.errors }}</li>
+						<script>
+						$("#mydatefield").dateinput();
+						</script>
+						<li><span> Gender</span>{{ form1.sex }}{{ form1.sex.errors }}</li>
+						<li><span> Blood type</span>{{ form1.bloodType }}{{ form1.bloodType.errors }}</li>
+						<li><span> Ethinicity</span>{{ form1.ethinicity }}{{ form1.ethinicity.errors }}</li>
+						<li><span> Phone</span>{{ form2.phone }}{{ form2.phone.errors }}</li>
+						<li><span> Phone type</span>{{ form2.phoneType }}{{ form2.phoneType.errors }}</li>
+						<li><span> E-mail</span>{{ form3.email }}{{ form3.email.errors }}</li>
+						<li><span> E-mail type</span>{{ form3.emailType }}{{ form3.emailType.errors }}</li>
+						<li><span> Adress</span>{{ form4.adress }}{{ form4.adress.errors }}</li>
+						<li><span> Adress type</span>{{ form4.adressType }}{{ form4.adressType.errors }}</li>
+						<li><input type="submit" value="Save" name = "createprofile"></li>
+						<li> {{ form1.myHiddenField }} </li>
+					</ul>
+					 </div> 
+        		</div>
+				</div>
+			</div>
+
+		</div>
+		<!--end of ency_box-->
+		
+		<div class="ency_box">
+			<div class="ency_cate_box">
+				<div class="ency_cate_block_profile">
+				<div id="inner_content_forms" style="padding:0px 0px 20px 0px;">		
+					<div id="formFields">
+					<ul>
+						<li> {{ displaymsgt2 }}</li>
+						<li><span> Condition</span>{{ form5.condition }}{{ form5.condition.errors }}</li>
+						<li><span> Period</span>{{ form5.period }}{{ form5.period.errors }}</li>
+						<li><span> Gender</span>{{ form5.gender }}{{ form5.gender.errors }}</li>
+						<li> <span>Relationship</span>{{ form5.relation }}{{ form5.relation.errors }}</li>
+						<li><span> Relationship type</span>{{ form5.relationshipType }}{{ form5.relationshipType.errors }}</li>
+						<li><input type="submit" value="Save" name = "createfamilyhistory"></li>
+						<li> {{ form5.myHiddenField1 }} </li>
+						<li> {{ form5.myHiddenField2 }} </li>
+					</ul>
+				</div>
+			</div>
+				</div>
+			</div>
+		</div>
+		<!--end of ency_box-->
+		
+		<div class="ency_box">
+			<div class="ency_cate_box">
+				<div class="ency_cate_block_profile">
+				<div id="inner_content_forms" style="padding:0px 0px 20px 0px;">		
+					<div id="formFields">
+					<ul>
+						<li> {{ displaymsgt3 }}</li>
+						<li><span> First name</span>{{ form6.firstName }}{{ form6.firstName.errors }}</li>
+						<li><span> Middle name</span>{{ form6.middleName }}{{ form6.middleName.errors }}</li>
+						<li><span> Last name</span>{{ form6.lastName }}{{ form6.lastName.errors }}</li>
+						<li><span> Relationship</span>{{ form6.relationship }}{{ form6.relationship.errors }}</li>
+						<li><span> Phone</span>{{ form7.phone }}{{ form7.phone.errors }}</li>
+						<li><span> Phone type</span>{{ form7.phoneType }}{{ form7.phoneType.errors }}</li>
+						<li><span> E-mail</span>{{ form8.email }}{{ form8.email.errors }}</li>
+						<li><span> E-mail type</span>{{ form8.emailType }}{{ form8.emailType.errors }}</li>
+						<li><span> Adress</span>{{ form9.adress }}{{ form9.adress.errors }}</li>
+						<li><span> Adress type</span>{{ form9.adressType }}{{ form9.adressType.errors }}</li>
+						<li><input type="submit" value="Save" name = "createemergencycontacts"></li>
+						<li> {{ form6.myHiddenField1 }} </li>
+						<li> {{ form6.myHiddenField2 }} </li>
+					</ul>
+				</div>
+				</div>
+				</div>
+			</div>
+		</div>
+		<!--end of ency_box-->
+
+		
+		<div class="ency_box">
+			<div class="ency_cate_box">
+				<div class="ency_cate_block_profile" >
+				<div id="inner_content_forms" style="padding:0px 0px 20px 0px;">		
+					<div id="formFields">
+					<ul>
+						<li> {{ displaymsgt4 }}</li>
+						<li><span> Marital Status</span>{{ form10.maritalStatus }}{{ form10.maritalStatus.errors }}</li>
+						<li><span> Work conditions</span>{{ form10.workConditions }}{{ form10.workConditions.errors }}</li>
+						<li> <span>Drug use</span>{{ form10.drugUse }}{{ form10.drugUse.errors }}</li>
+						<li><span> Physical activity</span>{{ form10.physicalActivity }}{{ form10.physicalActivity.errors }}</li>
+						<li><input type="submit" value="Save" name = "createsocialhistory"></li>
+						<li> {{ form10.myHiddenField }} </li>
+					</ul>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--end of ency_box-->
+		</form>
+
+	</div>
+	<!--end of ency_holder-->
+
+
+
+</div>
+<!--end of content-->
+
+{% endblock %}

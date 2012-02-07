@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% block title %}Healthpark::Forum Activity{% endblock %}
+
+{% block js %} 
+<script type="text/javascript">
+        function get_csrf_token_for_category(){
+			document.getElementById("csrfs_token2").innerHTML = "{% csrf_token %}";
+		}
+        $(document).ready(function() {
+        	document.getElementById("csrfs_token2").innerHTML = "{% csrf_token %}";
+      });
+        
+</script>
+{% endblock %}
+
+{% block content %}
+
+		<div id="content">
+		<div id="fb-root"></div>
+		<p id='msg'></p>
+			<div class="breadcrumb">
+				
+				<a href="/" class="bc1"><strong>home</strong></a>
+				{% ifequal display_category 'TRUE' %}
+				<span class="bc5">Community</span>
+				{% endifequal %}
+				{% ifequal display_forum 'TRUE' %}
+				<a href="/forum/" class="bc2">Community</a>
+				<span class="bc5">{{category_name}}</span>
+				{% endifequal %}
+				{% ifequal display_thread 'TRUE' %}
+				<a href="/forum/" class="bc2">Community</a>
+				<span class="bc5" title="{{category_name}}"><a href="/" id="forum_bread" class="bc2" >{{category_name}}</a></span>
+				<span class="bc5" title="{{thread_name}}">{{thread_name|slice:":20"}}...</span>
+				{% endifequal %}
+				
+			</div>
+<!--
+@Description:
+This page display only one of these three portions at a time:
+1- display_category
+2- display_forum
+3- display_thread
+
+@Ifequal is used in else-if context
+  -->		
+			{% ifequal display_category 'TRUE' %}
+			<div class="cont_row">
+				<div class="cont_col1">
+					<div class="main_box_title">
+					<div class="main_box_title_inside">
+						<div class="main_title title_forum">Forum Categories</div>
+					</div>
+					</div>
+					
+					<div class="main_box">
+						<div class="cate_row">
+							<div class="cate_col">
+								<ul class="fcate_list">
+									<!-- <li>
+										<a href="javascript:void(0)" class="has_sub">Diabetes</a>
+										<ul>
+											<li><a href="javascript:void(0)">Type 1 diabetes</a></li>
+											<li><a href="javascript:void(0)">Type 2 diabetes</a></li>
+										</ul>
+									</li> -->
+									{% load forum_tag %}
+									{%getCategories user_isLogged owner topic_id topic_is_locked '' '' %}	
+								</ul>
+							</div>
+						</div><!--end of cate_row-->
+					</div><!--end of main_box-->
+				</div><!--end of cont_col1-->
+				
+
+				<div class="cont_col2">
+					<div class="ad1"><a href="javascript:void(0)"><img src="{{MEDIA_URL}}images/media/ad4.gif" alt="" width="200px" height="150px"></a></div>
+				</div><!--end of cont_col2-->
+				
+				<br class="cl">
+				
+			</div><!--end of cont_row-->
+
+			
+			<form action="/searchthread/" method = "post" class="forum_search_form">{% csrf_token %}
+			<fieldset>
+				<!-- <input type="text" class="input_keyword"> -->
+				{{ search_form.search_text }}
+				{{ search_form.category_choices }}
+				<input type="submit" class="input_search" value="Search Forums">
+			</fieldset>
+			</form>
+			{% endifequal %}
+			{% ifequal display_forum 'TRUE' %}
+			<div class="main_content">
+				<div class="main_block">
+					<div class="title_row">
+						<div class="main_title title_forum">{{category_name}}</div>
+						<ul class="btns_list">
+							<!-- <li class="on"><a href="javascript:void(0)">Most Popular<span>&nbsp;</span></a></li>
+							<li><a href="javascript:void(0)">Most Discussed<span>&nbsp;</span></a></li>
+							<li><a href="javascript:void(0)">Most Recent<span>&nbsp;</span></a></li>-->
+							<li class="on" id="most_popular_forum">Most Popular<span id="popular_nav_forum">&nbsp;</span></li>
+							<li  id="most_discussed_forum">Most Discussed</li>
+							<li  id="most_recent_forum">Most Recent</li>
+							
+						</ul>
+					</div><!--end of title_row-->
+					
+					<div class="forum_box">
+							<div id="forum_content">
+								{% load forum_tag %}
+								{% getForumActivityContent category user_isLogged owner topic_is_locked %}	
+							</div><!--end of forum_content-->
+					</div><!--end of forum_box-->
+					
+					<div class="see_more"><span id="see_more">See More <span id="see_more_arrow">&nbsp;</span></div>
+					
+				</div><!--end of main_block-->
+			</div><!--end of main_content-->
+			
+			
+			<div class="sidebar">
+			{% if user_isLogged and not topic_is_locked %}
+				<a href="newthread/{{category}}/" style="padding-left:10px"><img src="{{MEDIA_URL}}images/new_thread_button.png"/></a>
+			{% else %}
+				{% if user_isLogged and topic_is_locked %}
+				<a style="padding-left:10px"><img src="{{MEDIA_URL}}images/new_thread_button_locked.png"/></a>
+				{% endif %}
+			{% endif %}	
+			{% if not user_isLogged %}
+				<a href="newthread/{{category}}/" style="padding-left:10px" onclick="return openFancyBox();"><img src="{{MEDIA_URL}}images/new_thread_button.png"/></a>
+			{% endif %}	
+				<div class="side_box2">
+					
+					<div class="side_title2">Categories<span class="view_more"><a href="/forum/" title="View More Categories"><img src="{{MEDIA_URL}}/images/icon_viewMore.gif"/></a></div>
+					<ul class="fcate_list"  style="clear:both">
+						<!--<li>
+							 <a href="javascript:void(0)" class="has_sub">Diabetes</a>
+							<ul>
+								<li><a href="javascript:void(0)">Type 1 diabetes</a></li>
+								<li><a href="javascript:void(0)">Type 2 diabetes</a></li>
+							</ul>
+						</li>-->
+						{% load forum_tag %}
+						{% getCategories user_isLogged owner category topic_is_locked '' 'limit 10' %}	
+						<li class="view_more_link" style="font-size:12px;font-style:normal;"><a href="/forum/" title="View More Categories">View More</a></li>
+					</ul>
+					
+				</div><!--end of side_box2-->
+				
+				
+				<div class="side_box2">
+					<div class="side_title3">Recently Viewed</div>
+					<ul class="recently_viewed_list">
+						<li><span>Tags - <a href="javascript:void(0);">Type 2 Diabetes</a></span><a href="javascript:void(0);">Excepteur sint occaecat cupidatat non proident, sunt in culpa...</a></li>
+						<li><span>Tags - <a href="javascript:void(0);">Type 2 Diabetes</a></span><a href="javascript:void(0);">Non proident, sunt in culpa qui officia deserunt mollit...</a></li>
+					</ul>
+				</div><!--end of side_box2-->
+				
+				<div class="ad2"><a href="javascript:void(0);"><img src="{{MEDIA_URL}}images/media/ad2.gif" alt="" height="200px" width="159px"></a></div>
+			</div><!--end of sidebar-->
+			{% endifequal %}	
+			<br class="cl">
+			{% ifequal display_thread 'TRUE' %}
+			<div class="main_content">
+				<div class="main_block">
+					{% load forum_tag %}
+					{% getForumActivityThreads topic_id thread user_isLogged reply_form owner %}	
+				</div><!--end of main_block-->
+
+			</div><!--end of main_content-->
+			
+			
+			<div class="sidebar">
+				<div class="side_box2">
+					<div class="side_title2">Categories<span class="view_more"><a href="/forum/" title="View More Categories"><img src="{{MEDIA_URL}}/images/icon_viewMore.gif"/></a></div>
+					<ul class="fcate_list" style="clear:both">
+						<!-- <li>
+							<a href="javascript:void(0)" class="has_sub">Diabetes</a>
+							<ul>
+								<li><a href="javascript:void(0)">Type 1 diabetes</a></li>
+								<li><a href="javascript:void(0)">Type 2 diabetes</a></li>
+							</ul>
+						</li> -->
+							
+						{% load forum_tag %}
+						{% getCategories user_isLogged owner topic_id topic_is_locked thread 'limit 10' %}	
+						<li class="view_more_link" style="font-size:12px;font-style:normal;"><a href="/forum/" title="View More Categories">View More</a></li>
+					</ul>
+					
+				</div><!--end of side_box2-->
+				
+				
+				<div class="side_box2">
+					<div class="side_title3">Recently Viewed</div>
+					<ul class="recently_viewed_list">
+						<li><span>Tags - <a href="javascript:void(0);">Type 2 Diabetes</a></span><a href="javascript:void(0);">Excepteur sint occaecat cupidatat non proident, sunt in culpa...</a></li>
+						<li><span>Tags - <a href="javascript:void(0);">Type 2 Diabetes</a></span><a href="javascript:void(0);">Non proident, sunt in culpa qui officia deserunt mollit...</a></li>
+					</ul>
+				</div><!--end of side_box2-->
+				
+				<div class="ad2"><a href="javascript:void(0);"><img src="{{MEDIA_URL}}images/media/ad2.gif" alt="" height="200px" width="159px"></a></div>
+			</div><!--end of sidebar-->
+			{% endifequal %}	
+			<br class="cl">
+			<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+		</div><!--end of content-->
+				
+
+{% endblock %}

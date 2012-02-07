@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}HealthPark News{% endblock %}
+
+{% block content %}
+{% load feeds_tags %} {% parse_feed items 12 %}
+		<div id="content">
+			<div class="breadcrumb">
+				<a href="#" class="bc1"><strong>home</strong></a>
+				<span class="bc2">News</span>
+			</div>
+			
+
+			
+			<div class="cont_row">
+				<!-- <div class="sidebar2">
+					<div class="side_box3">
+						<div class="side_title2">By Category</div>
+						<ul class="fcate_list">
+							<li><a href="#">All</a></li>
+							<li>
+								<a href="#" class="has_sub">Women</a>
+								<ul>
+									<li><a href="#">Conditions (2)</a></li>
+									<li><a href="#">Alternative Medicine (1)</a></li>
+									<li><a href="#">Self-Care (3)</a></li>
+									<li><a href="#">Care Guide (2)</a></li>
+									<li><a href="#">Pregnancy (1)</a></li>	
+								</ul>
+							</li>
+							<li><a href="#">Men</a></li>
+							<li><a href="#">Pediatric</a></li>
+							<li><a href="#">Seniors</a></li>
+							<li><a href="#">Cancer</a></li>
+							<li><a href="#">Orthopedic</a></li>
+							<li><a href="#">Heart</a></li>
+							<li><a href="#">Neurology</a></li>
+						</ul>
+					</div><!--end of side_box3
+
+					<div class="side_box3">
+						<div class="side_title2">Date Added</div>
+						<ul class="fcate_list">
+							<li><a href="#">Today <span>(25)</span></a></li>
+							<li><a href="#">Past week <span>(1)</span></a></li>
+							<li><a href="#">Past Month <span>(2)</span></a></li>
+							<li><a href="#">Past 6 Months <span>(2)</span></a></li>
+							<li><a href="#">Past Year <span>(2)</span></a></li>
+							<li><a href="#">All <span>(2)</span></a></li>
+						</ul>
+					</div><!--end of side_box3
+					
+				</div><!--end of sidebar2
+				 -->
+				{% block sidebar %}{% endblock %}
+				
+				
+				
+				<div class="main_content2">
+					<div class="main_block">
+						<div class="title_row">
+							<div class="main_title title_news">Health News</div>
+							<ul class="btns_list">
+								<!-- <li class="on"><a>Most Recent<span>&nbsp;</span></a></li> -->
+								<!-- <li><a href="#">Most Popular<span>&nbsp;</span></a></li> -->
+								<!--<li><a href="#">Most Discussed<span>&nbsp;</span></a></li> -->
+							</ul>
+						</div>
+						{% block disp_news_items %}{% endblock %}
+						
+						{% comment %}
+						{% include "horizontal_summarized_all.html" %}
+						{% endcomment %}
+						<!-- <div class="see_more"><a href="#">See More <span>&nbsp;</span></a></div> -->
+						
+					</div><!--end of main_block-->
+	
+				</div><!--end of main_content2-->
+				
+				<br class="cl">
+			</div><!--end of cont_row-->
+
+				<br class="cl">
+			</div><!--end of cont_row-->
+			
+		
+		</div><!--end of content-->
+{% endblock %}		
+		

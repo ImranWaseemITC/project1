@@ -1,0 +1,203 @@
+{% ifequal div_type 0 %}
+	
+	<!-- User login -->
+	{% if user_isLogged and not is_locked %}		
+	<div class="leave_comment_box">
+	<div class="error_message" id="errors" style="margin-top:10px"><span id="errors_msg"></span></div>
+		<form action="/threadreply/{{topic_id}}/{{thread}}" method="post" id="searchForm" onsubmit="return validateThreadForm();">
+		<span id="csrfs_token2"></span>
+			<fieldset>
+				<label>Leave your own comment:</label>
+				{{ reply_form.thread_body }}
+				<input type="submit" class="input_submit" value="Submit">
+			</fieldset>
+		</form>
+	</div>
+	
+	{% else %}
+		{% if is_locked %}
+			<div class="leave_comment_box">
+				<label>This thread is locked to replies by the owner</label>
+			</div>
+		{% else %}
+		<div class="leave_comment_box">
+			<label>Leave your own comment:</label>
+			<a href="/login/" class="btn_login" onclick="return openFancyBox();">Login to leave a reply</a>
+		</div>
+		{% endif %}
+	{% endif %}
+		
+	<div class="single_activity" id = "{{div_id}}">
+	<div class="activity_btn">
+		<a href="/upvote/{{id}}/{{topic_id}}/{{thread}}" class="btn_up" {% if user_isLogged %}{% else %}onclick="return openFancyBox();" {% endif %} >btn_up</a>
+		<span>{{most_popular}}</span>
+		<a href="/downvote/{{id}}/{{topic_id}}/{{thread}}" class="btn_down" {% if user_isLogged %}{% else %}onclick="return openFancyBox();" {% endif %}>btn_down</a>
+	</div>
+									
+	<div class="activity_txt">
+		<div class="act_info"><span id="minus{{div_id}}" class = "minus_link" onclick="collapseDiv('{{div_id}}')">[ - ]</span><a href="#"> {{first_name}} {{last_name}}</a> {{thread_date}} days and {{thread_time}} hours ago | Tags - <a href="javascript:void(0)">{{thread_title}}</a></div>
+		<p>{{thread_body}}</p>
+		<div class="act_link">
+			<a href="#" class="link">Report</a>
+			{% if not is_locked %} 
+			<a href="newthread/{{topic_id}}/{{id}}/{{thread}}" class="link">Reply</a>
+			{% endif %}
+			{% if user_isLogged %}
+				{% ifequal display_activity_links 'true' %}
+				<a href="/forum/editthread/{{id}}/thread/{{topic_id}}/{{thread}}" class="link" title="Click to Edit Post">Edit</a>  
+				<span onclick="deleteForumPost('{{id}}','thread','{{topic_id}}','{{thread}}')" class="link delete_link" title="Click to Delete Post">Delete</span>
+				{% endifequal %} 
+			{% endif %} 
+		</div>
+	</div>
+</div><!--end of single_activity-->
+<div class="activity_comments">
+		<ul>
+			<li>
+{% endifequal %}
+
+{% ifequal div_type 1 %}
+	<div class="title_row">
+		<div class="main_title title_forum">{{thread_title}}</div>
+		<a class="btn_view" href="/forum/?cat_id={{topic_id}}/">Back to Forum</a>
+	</div><!--end of title_row-->
+	<div class="activity_detail">
+		<div class="single_activity">
+			<div class="activity_btn">
+				<a href="/upvote/{{id}}/{{topic_id}}/{{thread}}" class="btn_up" {% if user_isLogged %}{% else %}onclick="return openFancyBox();" {% endif %} >btn_up</a>
+				<span>{{most_popular}}</span>
+				<a href="/downvote/{{id}}/{{topic_id}}/{{thread}}" class="btn_down" {% if user_isLogged %}{% else %}onclick="return openFancyBox();" {% endif %} >btn_down</a>
+			</div>
+			<div class="activity_txt">
+				<div class="act_title" id="title-{{ id }}">{{thread_title}}</div>
+				<div class="act_info"><a href="javascript:void(0)">{{first_name}} {{last_name}}</a> {{thread_date}} days and {{thread_time}} hours ago | Tags - <a href="javascript:void(0)">{{thread_title}}</a></div>
+				<span id="threadtxt">
+				{{thread_body}}
+				</span>
+				<div class="act_link">
+					<a href="javascript:void(0);" class="link_comment"><span>{{thread_count}}</span> Comments</a>
+					<div class="share_holder">
+						<a class="link" href="javascript:void(0)">share</a>
+						<div class="share_box share_box2">
+							<!--<a class="btn_email" href="#">Email</a><b>|</b>-->
+							<a name="fb_share" type="icon_link" share_url="http://107.21.107.118:8000/forum/?topic_id={{ topic_id }}&thread_id={{ id }}" class="btn_facebook">facebook</a> 
+							
+							<a href="http://www.healthpark.ca/forum/?topic_id={{ topic_id }}&thread_id={{ id }}" title="Click to share this post on Twitter" class="btn_twitter" onclick="return followtwitter('link-{{id}}');" id="link-{{id}}">twitter</a>
+							<a class="btn_reddit" href="http://www.reddit.com/submit" onclick="return followredit();" title="Click to share this post on Reddit" >reddit</a>
+							<!--<a href="#">twitter</a>
+							<a class="btn_reddit" href="#">reddit</a>-->
+						</div>
+					 </div>
+					<a href="javascript:void(0)" class="link">Report</a>  
+					{% if user_isLogged %}
+						{% ifequal display_activity_links 'true' %}
+						<a href="/forum/editthread/{{id}}/thread/{{topic_id}}/{{thread}}" class="link" title="Click to Edit Post">Edit</a>  
+						<span onclick="deleteForumPost('{{id}}','thread','{{topic_id}}','{{thread}}')" class="link delete_link" title="Click to Delete Post">Delete</span> 
+						{%if is_locked%}
+						<a href="/unlockthread/{{id}}/{{topic_id}}" class="link"><img src="../media/images/unlock-icon.png"/>Un-Lock</a>
+						{% else %}
+						<a href="/lockthread/{{id}}/{{topic_id}}" class="link"><img src="../media/images/lock-icon.png"/>Lock</a>
+						{% endif %}
+						{% endifequal %} 
+					{% endif %}            
+				</div>
+			</div>
+		</div>	
+		<input type="hidden" id="cat_id" value="{{topic_id}}"/>
+	</div><!-- end of activity detail -->
+	
+	<!-- User login -->
+	{% if user_isLogged and not is_locked %}		
+	<div class="leave_comment_box">
+	<div class="error_message" id="errors" style="margin-top:10px"><span id="errors_msg"></span></div>
+		<form action="/threadreply/{{topic_id}}/{{thread}}" method="post" id="searchForm" onsubmit="return validateThreadForm();">
+		<span id="csrfs_token2"></span>
+			<fieldset>
+				<label>Leave your own comment:</label>
+				{{ reply_form.thread_body }}
+				<input type="submit" class="input_submit" value="Submit">
+			</fieldset>
+		</form>
+	</div>
+	
+	{% else %}
+		{% if is_locked %}
+			<div class="leave_comment_box">
+				<label>This thread is locked to replies by the owner</label>
+			</div>
+		{% else %}
+		<div class="leave_comment_box">
+			<label>Leave your own comment:</label>
+			<a href="/login/" class="btn_login" onclick="return openFancyBox();">Login to leave a reply</a>
+		</div>
+		{% endif %}
+	{% endif %}
+	
+	<div class="activity_comments">
+		<ul>
+			<li>				
+{% endifequal %}
+
+{% ifequal div_type 2 %}
+<div class="single_activity" id = "{{div_id}}">
+	<div class="activity_btn">
+		<a href="/upvote/{{id}}/{{topic_id}}/{{thread}}" class="btn_up" {% if user_isLogged %}{% else %}onclick="return openFancyBox();"{% endif %} >btn_up</a>
+		<span>{{most_popular}}</span>
+		<a href="/downvote/{{id}}/{{topic_id}}/{{thread}}" class="btn_down" {% if user_isLogged %}{% else %}onclick="return openFancyBox();" {% endif %} >btn_down</a>
+	</div>
+									
+	<div class="activity_txt">
+		<div class="act_info"><span id="minus{{div_id}}" class = "minus_link" onclick="collapseDiv('{{div_id}}')">[ - ]</span><a href="#"> {{first_name}} {{last_name}}</a> {{thread_date}} days and {{thread_time}} hours ago | Tags - <a href="javascript:void(0)">{{thread_title}}</a></div>
+		<p>{{thread_body}}</p>
+		<div class="act_link">
+			<a href="#" class="link">Report</a>
+			{% if not is_locked %} 
+				{% if user_isLogged %}
+					<a href="newthread/{{topic_id}}/{{id}}/{{thread}}" class="link">Reply</a>
+				{% endif %} 
+			{% endif %}
+			{% if user_isLogged %}
+				{% ifequal display_activity_links 'true' %}
+				<a href="/forum/editthread/{{id}}/thread/{{topic_id}}/{{thread}}" class="link" title="Click to Edit Post">Edit</a>  
+				<span onclick="deleteForumPost('{{id}}','thread','{{topic_id}}','{{thread}}')" class="link delete_link" title="Click to Delete Post">Delete</span>
+				{% endifequal %} 
+			{% endif %} 
+		</div>
+	</div>
+</div><!--end of single_activity-->
+
+{% endifequal %}
+
+{% ifequal div_type 3 %}
+<div id="{{div_id}}">
+	<ul>
+		<li>
+			<div class="single_activity">
+				<div class="activity_btn">
+					<a href="/upvote/{{id}}/{{topic_id}}/{{thread}}" class="btn_up" {% if user_isLogged %}{% else %}onclick="return openFancyBox();" {% endif %} >btn_up</a>
+					<span>{{most_popular}}</span>
+					<a href="/downvote/{{id}}/{{topic_id}}/{{thread}}" class="btn_down" {% if user_isLogged %}{% else %}onclick="return openFancyBox();" {% endif %} >btn_down</a>
+				</div>
+				<div class="activity_txt">
+					<div class="act_info"><span id="minus{{div_id}}" class = "minus_link" onclick="collapseDiv('{{div_id}}')">[ - ]</span><a href="#"> {{first_name}} {{last_name}}</a> {{thread_date}} days and {{thread_time}} hours ago | Tags - <a href="javascript:void(0)">{{thread_title}}</a></div>
+					<p>{{thread_body}}</p>
+					<div class="act_link">
+						<a href="#" class="link">Report</a> 
+						{% if not is_locked %}
+							{% if user_isLogged %}
+								<a href="newthread/{{topic_id}}/{{id}}/{{thread}}" class="link">Reply</a>
+							{% endif %}
+						{% endif %}
+						{% if user_isLogged %}
+						{% ifequal display_activity_links 'true' %}
+						<a href="/forum/editthread/{{id}}/thread/{{topic_id}}/{{thread}}" class="link" title="Click to Edit Post">Edit</a>  
+						<span onclick="deleteForumPost('{{id}}','thread','{{topic_id}}','{{thread}}')" class="link delete_link" title="Click to Delete Post">Delete</span>
+						{% endifequal %} 
+						{% endif %} 
+					</div>
+				</div>
+			</div>	
+		</li>
+	</ul>
+</div>	
+{% endifequal %}

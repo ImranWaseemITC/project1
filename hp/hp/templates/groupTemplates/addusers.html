@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>Add Users To Group</title>
+ <script type="text/javascript"
+src="http://code.jquery.com/jquery-latest.js" ></script>
+   <script type="text/javascript">
+       $(function () {
+           $("#djangocombo").find("select").bind("change", function () {
+        	   $("#myHiddenFieldValue").val("True");
+               $("#form1").submit();
+           });
+       });
+   </script>
+</head>
+<body>
+&nbsp;&nbsp;&nbsp;&nbsp;<h3>Add Users To Group</h3>
+{{error}}
+<form id = "form1" action="" method="post">{% csrf_token %}
+<div id='djangocombo'>
+{{form.as_p}}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Save">
+</div>
+</form>
+<form action="/groupmanager/" method="LINK">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Back To Group Manager"></br></br>
+</form>
+</body>
+</html>

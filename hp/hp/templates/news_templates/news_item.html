@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}HealthPark News{% endblock %}
+
+{% block js %}
+		<script type="text/javascript">
+			$(document).ready( function(){
+				//dropmenu
+				$('.nav').superfish();
+
+				//fcate accordion
+				$('.fcate_list a.has_sub').click( function(){
+					$(this).toggleClass('has_sub_on');
+					$(this).next().slideToggle(300);
+					return false;
+				});
+				
+				
+			});
+		</script>
+{% endblock %}
+			
+{% block content %}		
+{% load feeds_tags %} {% parse_feed items news_id %}
+		<div id="content">
+			<div class="breadcrumb">
+				<a href="javascript:void(0)" class="bc1"><strong>home</strong></a>
+				<span class="bc2">News</span>
+			</div>
+			
+
+			
+			<div class="cont_row">
+				<div class="sidebar2">
+					<!-- <div class="side_box3">
+						<div class="side_title2">By Category</div>
+						<ul class="fcate_list">
+							<li><a href="javascript:void(0)">All</a></li>
+							<li>
+								<a href="javascript:void(0)" class="has_sub">Women</a>
+								<ul>
+									<li><a href="javascript:void(0)">Conditions (2)</a></li>
+									<li><a href="javascript:void(0)">Alternative Medicine (1)</a></li>
+									<li><a href="javascript:void(0)">Self-Care (3)</a></li>
+									<li><a href="javascript:void(0)">Care Guide (2)</a></li>
+									<li><a href="javascript:void(0)">Pregnancy (1)</a></li>	
+								</ul>
+							</li>
+							<li><a href="javascript:void(0)">Men</a></li>
+							<li><a href="javascript:void(0)">Pediatric</a></li>
+							<li><a href="javascript:void(0)">Seniors</a></li>
+							<li><a href="javascript:void(0)">Cancer</a></li>
+							<li><a href="javascript:void(0)">Orthopedic</a></li>
+							<li><a href="javascript:void(0)">Heart</a></li>
+							<li><a href="javascript:void(0)">Neurology</a></li>
+						</ul>
+					</div><!--end of side_box3
+
+
+					<div class="side_box3">
+						<div class="side_title2">Date Added</div>
+						<ul class="fcate_list">
+							<li><a href="javascript:void(0)">Today <span>(25)</span></a></li>
+							<li><a href="javascript:void(0)">Past week <span>(1)</span></a></li>
+							<li><a href="javascript:void(0)">Past Month <span>(2)</span></a></li>
+							<li><a href="javascript:void(0)">Past 6 Months <span>(2)</span></a></li>
+							<li><a href="javascript:void(0)">Past Year <span>(2)</span></a></li>
+							<li><a href="javascript:void(0)">All <span>(2)</span></a></li>
+						</ul>
+					</div><!--end of side_box3-->
+					
+					<div class="side_box3">
+						<div class="side_title2">Recently Viewed</div>
+						<ul class="recently_viewed_list">
+						{% for recent_news in items.recently_viewed %}
+					<a href="/read_news/{{recent_news.id}}/" target="_blank">
+							<li><span>{{recent_news.datetime_created}}</span>
+							{{recent_news.title|truncatesmart:75|safe}}</li>
+					</a>
+						{% endfor %}
+							<!-- <li><span>Tags - <a href="javascript:void(0)">Type 2 Diabetes</a></span><a href="javascript:void(0)">Non proident, sunt in culpa qui officia deserunt mollit...</a></li> -->
+						</ul>
+					</div><!--end of side_box3-->
+					
+				</div><!--end of sidebar2-->
+				
+				
+				<div class="main_content2">
+
+					<div class="main_box_title">
+					<a href="/news_feed/" title="News Home">
+					<div class="main_box_title_inside">
+						<div class="main_title title_news">News</div>
+					</div>
+					</a>
+					</div>
+					
+					
+					<div class="main_box2">
+						<div class="detail_news">
+							<div class="detail_news_title">{{items.news_item.title}}</div>
+							
+							<div class="detail_news_col">
+								<div class="detail_news_date">{{items.news_item.datetime_created}}</div>
+								{% if items.news_item.author %}
+								<div class="detail_news_info">{{items.news_item.author}}  | <!--<a href="javascript:void(0)">Cancer</a>, <a href="javascript:void(0)">Men</a> --></div>
+								{% else %}
+								<br>
+								{% endif %}
+								<!-- <div class="para_btns para_btns2">
+									<a class="btn_print" href="javascript:void(0)">print</a>
+									<a class="btn_font_up" href="javascript:void(0)">font up</a>
+									<a class="btn_font_down" href="javascript:void(0)">font down</a>
+									<div class="share_holder">
+										<a class="btn_share" href="javascript:void(0)">share</a>
+										<div class="share_box">
+											<a class="btn_email" href="javascript:void(0)">Email</a><b>|</b>
+											<a class="btn_facebook" href="javascript:void(0)">facebook</a>
+											<a class="btn_twitter" href="javascript:void(0)">twitter</a>
+											<a class="btn_reddit" href="javascript:void(0)">reddit</a>
+										</div>
+									 </div>
+									<div class="cl"></div>
+								</div> -->
+								
+								<div class="detail_para">
+
+									<!-- <img src="{{MEDIA_URL}}images/media/news2.png" alt="" class="para_img"> -->
+									{{items.news_item.body|safe}}
+									<!-- <div class="share_holder">
+										<a href="javascript:void(0)" class="btn_share">share</a>
+										<span class="link_share">share</span>
+										<div class="share_box">
+											<a href="javascript:void(0)" class="btn_email">Email</a><b>|</b>
+											<a href="javascript:void(0)" class="btn_facebook">facebook</a>
+											<a href="javascript:void(0)" class="btn_twitter">twitter</a>
+											<a href="javascript:void(0)" class="btn_reddit">reddit</a>
+										</div>
+									 </div> -->
+									 <a href="/news_feed/" style="font-size:15px" title="News Home"><em>Back To News Page</em></a>
+									 <div class="cl"></div>
+									<div >
+									{% comment %}
+									{% load forum_tag %}
+									{% getForumActivityThreads '' news_id user_isLogged reply_form owner %}
+									{% endcomment %}
+									</div>
+								</div><!--end of detail_para-->
+								
+							</div><!--end of detail_col-->
+							 
+							<!-- <div class="detail_ads">
+								<div class="ad2"><a href="javascript:void(0)"><img alt="" src="{{MEDIA_URL}}images/media/ad2.gif"></a></div>
+								<div class="ad2"><a href="javascript:void(0)"><img alt="" src="{{MEDIA_URL}}images/media/ad2.gif"></a></div>
+								</div> -->
+							
+						</div><!--end of detail_news-->
+						
+						<div class="cl"></div>
+					</div>
+
+	
+				</div><!--end of main_content2-->
+				
+				<br class="cl">
+			</div><!--end of cont_row-->
+			
+		
+		</div><!--end of content-->
+			
+{% endblock %}

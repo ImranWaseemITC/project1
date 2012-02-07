@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title>Wow! This is video</title>
+	<script src="/media/flowplayerjs/flowplayer-3.2.6.min.js"></script>
+</head>
+<body>
+
+<a 
+	href="/media/flowplayer-700.flv" 
+	style="display:block;width:425px;height:300px;" 
+	id="player">
+</a>
+
+<script language="JavaScript">
+	flowplayer("player", "/media/flowplayerswf/flowplayer-3.2.7.swf", {
+		
+		
+		
+		// clip properties 
+		clip: {
+			
+			// these two settings will make the first frame visible
+			autoPlay: false,
+			autoBuffering: true,
+			
+			// locate a good looking first frame with the start parameter
+			start: 62,
+			
+			
+									
+			
+			// this is our video file. our server supports pseudostreaming
+			url: '/media/flowplayer-700.flv'		
+		}  
+		
+	});
+</script>
+</body>
+</html>
+
+           

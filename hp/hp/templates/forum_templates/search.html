@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block js %}		
+		<script type="text/javascript">
+			$(document).ready( function(){
+				//dropmenu
+				$('.nav').superfish();
+
+				//fcate accordion
+				$('.fcate_list a.has_sub').click( function(){
+					$(this).toggleClass('has_sub_on');
+					$(this).next().slideToggle(300);
+					return false;
+				});
+				
+				
+			});
+		</script>
+{% endblock %}
+
+{% block content %}		
+		<div id="content">
+			<div class="breadcrumb">
+				<a href="javascript:void(0)" class="bc1"><strong>home</strong></a>
+				<span class="bc2">Advanced Search</span>
+			</div>
+			
+			
+			<div class="cont_row">
+				<div class="sidebar2">
+					<div class="side_box3">
+						<div class="side_title2">In Category</div>
+						<ul class="fcate_list">
+							<li><a href="javascript:void(0)">All</a></li>
+							<li>
+								<a href="javascript:void(0)" class="has_sub">Encyclopedia <span>(25)</span></a>
+								<ul>
+									<li><a href="javascript:void(0)">Conditions (2)</a></li>
+									<li><a href="javascript:void(0)">Alternative Medicine (1)</a></li>
+									<li><a href="javascript:void(0)">Self-Care (3)</a></li>
+									<li><a href="javascript:void(0)">Care Guide (2)</a></li>
+									<li><a href="javascript:void(0)">Pregnancy (1)</a></li>	
+								</ul>
+							</li>
+							<li><a href="javascript:void(0)">News <span>(12)</span></a></li>
+							<li><a href="javascript:void(0)">Forums <span>(5)</span></a></li>
+							<li><a href="javascript:void(0)">Videos <span>(1)</span></a></li>
+							<li><a href="javascript:void(0)">Business Listings <span>(43)</span></a></li>
+							<li><a href="javascript:void(0)">Help <span>(2)</span></a></li>
+						</ul>
+					</div><!--end of side_box3-->
+					
+					
+					<div class="side_box3">
+						<div class="side_title2">Type</div>
+						<ul class="fcate_list">
+							<li><a href="javascript:void(0)">Article <span>(25)</span></a></li>
+							<li><a href="javascript:void(0)">Video <span>(12)</span></a></li>
+							<li><a href="javascript:void(0)">Images <span>(5)</span></a></li>
+							<li><a href="javascript:void(0)">News <span>(1)</span></a></li>
+							<li><a href="javascript:void(0)">Videos <span>(1)</span></a></li>
+							<li><a href="javascript:void(0)">Business Listings <span>(43)</span></a></li>
+							<li><a href="javascript:void(0)">Help <span>(2)</span></a></li>
+						</ul>
+					</div><!--end of side_box3-->
+					
+					
+					<div class="side_box3">
+						<div class="side_title2">Date Added</div>
+						<ul class="fcate_list">
+							<li><a href="javascript:void(0)">Today <span>(25)</span></a></li>
+							<li><a href="javascript:void(0)">Past week <span>(1)</span></a></li>
+							<li><a href="javascript:void(0)">Past Month <span>(2)</span></a></li>
+							<li><a href="javascript:void(0)">Past 6 Months <span>(2)</span></a></li>
+							<li><a href="javascript:void(0)">Past Year <span>(2)</span></a></li>
+							<li><a href="javascript:void(0)">All <span>(2)</span></a></li>
+						</ul>
+					</div><!--end of side_box3-->
+					
+				</div><!--end of sidebar2-->
+				
+				
+				
+				
+				<div class="main_content2">
+					<div class="main_block">
+						<div class="title_row">
+							<div class="main_title">Search Results</div>
+							<a href="/searchthread/adv/" class="btn_adv_search">Advanced Search</a>
+						</div><!--end of title_row-->
+						
+						<form action="" method = "post" class="result_search_form">{% csrf_token %}
+						<fieldset>
+							<div class="search_row">
+								{{ search_form.search_text }}
+								<div style="display:none">
+								{{ search_form.category_choices }}
+								</div>
+								<input type="submit" class="input_search" value="Search">
+							</div>
+							<div class="sort_by">
+								<label>Sort by:</label>
+								<select>
+									<option>Relevance</option>
+								</select>
+								
+								<label>Results per page:</label>
+								<select>
+									<option>15</option>
+									<option>30</option>
+									<option>50</option>
+								</select>
+							</div>
+						</fieldset>
+						</form>
+						
+						
+						<div class="result_title">{{threads_count}} results found for "{{search_text}}" in {{category_choices}}</div>
+					
+						<ul class="result_list">
+						{% for thread in threads %}
+							{% if not forloop.counter|divisibleby:2 %}
+							<li class="odd">
+							{% else %}
+							<li>
+							{% endif %}
+								<a href="javascript:void(0)">
+									<strong>{{ thread.threadName }}</strong>
+									<span>{{ thread.threadBody }}</span>
+								</a>
+							</li>
+						{% endfor %}						
+						</ul>
+						<div class="see_more"><a href="javascript:void(0)">See More <span>&nbsp;</span></a></div>
+						
+					</div><!--end of main_block-->
+	
+				</div><!--end of main_content2-->
+				
+				<br class="cl">
+			</div><!--end of cont_row-->
+			
+			
+		</div><!--end of content-->
+{% endblock %}

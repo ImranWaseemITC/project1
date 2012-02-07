@@ -1,0 +1,125 @@
+{% if view_from_page %}
+{% ifequal view_from_page 'home' %}
+
+<div class="single_activity single_act1">
+	<div class="activity_btn">
+		<a href="/upvote/{{id}}" class="btn_up" {% if user_isLogged %}{% else %}onclick="return openFancyBox();" {% endif %}>btn_up</a>
+		<span>{{most_popular}}</span>
+		<a href="/downvote/{{id}}" class="btn_down" {% if user_isLogged %}{% else %}onclick="return openFancyBox();"{% endif %}>btn_down</a>
+	</div>
+	<div class="activity_txt">
+		<div class="act_info"><a href="javascript:void(0);">{{first_name}} {{last_name}}</a> {{thread_date}} days and {{thread_time}} hours ago | Tags - <a href="javascript:void(0);">{{thread_topic}}</a></div>
+		<p><a href="/forum/?topic_id={{topic_id}}&thread_id={{id}}/" id="{{id}}">{{thread_body}}</a></p>
+		<div class="act_link">
+			<a href="/forum/?topic_id={{topic_id}}&thread_id={{id}}/" class="link_comment"><span>{{thread_count}}</span>Comments</a>
+			<div class="share_holder">
+				<a href="#" class="link">share</a>
+				<div class="share_box share_box2">
+					<!-- <a href="#" class="btn_email">Email</a><b>|</b> -->
+					<a name="fb_share" type="icon_link" share_url="http://107.21.107.118:8000/forum/?topic_id={{ topic_id }}&thread_id={{ id }}" class="btn_facebook">facebook</a>
+					<a href="http://www.healthpark.ca/forum/?topic_id={{ topic_id }}&thread_id={{ id }}" title="Click to share this post on Twitter" class="btn_twitter" onclick="return followtwitter('link-{{id}}');" id="link-{{id}}">twitter</a>
+					<a class="btn_reddit" href="http://www.reddit.com/submit" onclick="return followredit();" title="Click to share this post on Reddit" >reddit</a>
+					<!-- <a href="#" class="btn_twitter">twitter</a>
+					<a href="#" class="btn_reddit">reddit</a> -->
+				</div>
+			</div>
+			   <a href="#" class="link" >Report</a>  
+			   {% if user_isLogged %}
+					{% ifequal display_activity_links 'true' %}
+						<a href="/forum/editthread/{{id}}/home/{{topic_id}}/" title="Click to Edit Post" class="link">Edit</a>  
+						<span onclick="deletePost('{{id}}')" class="link delete_link" title="Click to Delete Post">Delete</span> 
+						<!-- {%if is_locked%}
+						<a href="unlockthread/{{id}}/" class="link">Un-Lock</a>
+						{% else %}
+						<a href="lockthread/{{id}}/" class="link">Lock</a>
+						{% endif %} -->
+					{% endifequal %} 
+				{% endif %}                    
+		</div>
+	</div>
+</div>
+{% endifequal %}
+
+{% ifequal view_from_page 'medical-content' %}
+<div class="single_activity">
+	<div class="activity_btn">
+		<a href="/upvote/{{id}}" class="btn_up" {% if user_isLogged %}{% else %}onclick="return openFancyBox();" {% endif %} >btn_up</a>
+		<span>{{most_popular}}</span>
+		<a href="/downvote/{{id}}" class="btn_down" {% if user_isLogged %}{% else %}onclick="return openFancyBox();" {% endif %} >btn_down</a>
+	</div>
+	<div class="activity_txt">
+		<div class="act_info"><a href="javascript:void(0);">{{first_name}} {{last_name}}</a> {{thread_date}} days and {{thread_time}} hours ago | Tags - <a href="javascript:void(0);">{{thread_topic}}</a></div>
+		<p><a href="/forum/?topic_id={{topic_id}}&thread_id={{id}}/">{{thread_body}}</a></p>						
+		<div class="act_link">
+			<a href="/forum/?topic_id={{topic_id}}&thread_id={{id}}/" class="link_comment"><span>{{thread_count}}</span>Comments</a>
+			<div class="share_holder">
+				<a href="#" class="link">share</a>
+				<div class="share_box share_box2">
+					<a name="fb_share" type="icon_link" share_url="http://107.21.107.118:8000/forum/?topic_id={{ topic_id }}&thread_id={{ id }}" class="btn_facebook">facebook</a>
+					<a href="http://www.healthpark.ca/forum/?topic_id={{ topic_id }}&thread_id={{ id }}" title="Click to share this post on Twitter" class="btn_twitter" onclick="return followtwitter('link-{{id}}');" id="link-{{id}}">twitter</a>
+					<a class="btn_reddit" href="http://www.reddit.com/submit" onclick="return followredit();" title="Click to share this post on Reddit" >reddit</a>
+				</div>
+			</div>
+			{% if user_isLogged %}
+					{% ifequal display_activity_links 'true' %}
+						<a href="/forum/editthread/{{id}}/home/{{topic_id}}/" class="link" title="Click to Edit Post">Edit</a>  
+						<a href="/forum/deletethread/{{id}}/home/" class="link delete_link" title="Click to Delete Post" >Delete</a>
+						<a href="javascript:void(0)" class="link">Lock</a>  
+					{% endifequal %} 
+				{% endif %}    
+		</div>
+	</div>
+</div>
+{% endifequal %}
+{% else %}
+<div class="single_activity single_act1">
+	<div class="activity_btn">
+		{% ifequal view_page 'view-all-forum' %}
+		<a href="/upvote/{{id}}/{{topic_id}}//view-all/" class="btn_up" {% if user_isLogged %}{% else %}onclick="return openFancyBox();" {% endif %}>btn_up</a>
+		<span>{{most_popular}}</span>
+		<a href="/downvote/{{id}}/{{topic_id}}//view-all/" class="btn_down" {% if user_isLogged %}{% else %}onclick="return openFancyBox();" {% endif %}>btn_down</a>
+		{% else %}
+		<a href="/upvote/{{id}}/{{topic_id}}" class="btn_up" {% if user_isLogged %}{% else %}onclick="return openFancyBox();" {% endif %}>btn_up</a>
+		<span>{{most_popular}}</span>
+		<a href="/downvote/{{id}}/{{topic_id}}" class="btn_down" {% if user_isLogged %}{% else %}onclick="return openFancyBox();" {% endif %}>btn_down</a>
+		{% endifequal %}
+	</div>
+	<div class="activity_txt">
+		<div class="act_info"><a href="javascript:void(0);">{{first_name}} {{last_name}}</a> {{thread_date}} days and {{thread_time}} hours ago | Tags - <a href="javascript:void(0);">{{thread_topic}}</a></div>
+		<p><a href="/forum/?topic_id={{topic_id}}&thread_id={{id}}/" id="{{id}}">{{thread_body}}</a></p>
+		<div class="act_link">
+			<a href="/forum/?topic_id={{topic_id}}&thread_id={{id}}/" class="link_comment"><span>{{thread_count}}</span>Comments</a>
+			<div class="share_holder">
+				<a href="#" class="link">share</a>
+				<div class="share_box share_box2">
+					<!-- <a href="#" class="btn_email">Email</a><b>|</b> -->
+					<a name="fb_share" type="icon_link" share_url="http://107.21.107.118:8000/forum/?topic_id={{ topic_id }}&thread_id={{ id }}" class="btn_facebook">facebook</a>
+					<a href="http://www.healthpark.ca/forum/?topic_id={{ topic_id }}&thread_id={{ id }}" title="Click to share this post on Twitter" class="btn_twitter" onclick="return followtwitter('link-{{id}}');" id="link-{{id}}">twitter</a>
+					<a class="btn_reddit" href="http://www.reddit.com/submit" onclick="return followredit();" title="Click to share this post on Reddit" >reddit</a>
+					<!--<a href="#" class="btn_twitter">twitter</a>
+					<a href="#" class="btn_reddit">reddit</a> -->
+				</div>
+			</div>
+			   <a href="#" class="link" >Report</a> 
+				{% if user_isLogged %}
+					{% ifequal display_activity_links 'true' %}
+						{% ifequal view_page 'view-all-forum' %}
+						<a href="/forum/editthread/{{id}}/view-all/{{topic_id}}/" class="link" title="Click to Edit Post">Edit</a>  
+						<span onclick="deleteForumPost('{{id}}','view-all','{{topic_id}}','')" class="link delete_link" title="Click to Delete Post">Delete</span> 
+						{% else %}
+						<a href="/forum/editthread/{{id}}/forum/{{topic_id}}/" class="link" title="Click to Edit Post">Edit</a>  
+						<span onclick="deleteForumPost('{{id}}','forum','{{topic_id}}','')" class="link delete_link" title="Click to Delete Post">Delete</span> 
+						<!-- {%if is_locked%}
+						<a href="/unlockthread/{{id}}/{{topic_id}}" class="link">Un-Lock</a>
+						{% else %}
+						<a href="/lockthread/{{id}}/{{topic_id}}" class="link">Lock</a>
+						{% endif %} -->
+						{% endifequal %}
+					{% endifequal %} 
+				{% endif %}           
+		</div>
+	</div>
+</div>
+
+{% endif %}
+

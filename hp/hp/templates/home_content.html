@@ -1,0 +1,406 @@
+{% extends "base.html" %}
+{% block title %}Healthpark::Home{% endblock %}
+{% block js %}
+<script type="text/javascript">
+			$(document).ready( function(){
+				//dropmenu
+				$('.nav').superfish();
+				
+				$('.article_slider ul').before('<div class="article_slider_nav">').cycle({
+					fx: 'scrollHorz',
+					easing: "easeInOutExpo",
+					speed: 500, 
+					timeout: 0,
+					pager: '.article_slider_nav'
+				});
+				
+				//tab
+				var $tabs=$('.ency_tab li');
+				var $tabs_content=$('.ency_box');
+				$tabs_content.hide();
+				$tabs_content.eq(0).show();
+				$tabs.click( function(){
+					$tabs.removeClass('on');
+					$(this).addClass('on');
+					$tabs_content.hide();
+					var order=$('.ency_tab li').index( $(this) );
+					$('.ency_box').eq(order).show();
+					return false;
+				});
+				
+			});
+			function get_csrf_token_for_category(subcontent){
+				document.getElementById(subcontent).innerHTML = "{% csrf_token %}";
+			}
+			function deleteActiveCategory(category_id){
+				jConfirm('Are you sure you want to delete this category?', 'Confirmation Box', function(r) {
+					if (r == true && category_id.length > 0){
+						document.location.href ="/forum/deletecategory/"+category_id+"/";
+					}	
+				});
+			}
+			function deletePost(thread_id){
+				jConfirm('Are you sure you want to delete this post?', 'Confirmation Box', function(r) {
+					if (r == true && thread_id.length > 0){
+						document.location.href ="/forum/deletethread/"+thread_id+"/home/";
+					}	
+				});
+			}
+			
+
+</script>
+	
+{% endblock %}
+{% block content %}
+						
+		<div id="content">	
+		<div id="fb-root"></div>
+		<p id='msg'></p>
+			<!-- <div class="info_box">
+				<a href="javascript:void(0)" class="btn_close">close</a>
+				<p class="p_note">
+				Welcome to HealthPark.ca!  We have matched your location to <strong>Halifax, Nova Scotia.</strong> If this is not correct please change your location using the "choose location" option above.</p>
+			</div> -->
+
+			 <div class="cont_row">
+				<div class="cont_col1">
+					<div class="title"><h2 class="h_articles"><span>Featured Articles</span></h2></div>
+					
+					<!-- <div class="article_slider">
+						<ul>-->
+						    {% load featured_articles_tag %}
+ 						    {% getContents %}
+							<!--<li>
+								<div class="art_img"><img src="{{MEDIA_URL}}images/media/img_article.gif" width="360" height="269" alt=""></div>
+								<div class="art_txt">
+									<div class="art_title">Soy eaters may have lower rates of lung cancer</div>
+									<div class="art_date">November 17, 2011</div>
+									<div class="art_info">By Andrew M. Seaman | <a href="javascript:void(0)">Cancer</a>, <a href="javascript:void(0)">Nutrition</a></div>
+									<p>Medicare and Medicaid will cover the cost of infusion associated with Dendreon Corp's prostate cancer vaccine Provenge, the company said on Monday.</p>
+									<div class="art_links">
+										<a href="javascript:void(0)" class="link_comment"><span>20</span>Comments</a>
+										<a href="javascript:void(0)" class="link_more">Read More</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="art_img"><img src="{{MEDIA_URL}}images/media/img_article.gif" width="360" height="269" alt=""></div>
+								<div class="art_txt">
+									<div class="art_title">Title 2 Soy eaters may have lower rates</div>
+									<div class="art_date">November 17, 2011</div>
+									<div class="art_info">By Andrew M. Seaman | <a href="javascript:void(0)">Cancer</a>, <a href="javascript:void(0)">Nutrition</a></div>
+									<p>Medicare and Medicaid will cover the cost of infusion associated with Dendreon Corp's prostate cancer vaccine Provenge</p>
+									<div class="art_links">
+										<a href="javascript:void(0)" class="link_comment"><span>20</span>Comments</a>
+										<a href="javascript:void(0)" class="link_more">Read More</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="art_img"><img src="{{MEDIA_URL}}images/media/img_article.gif" width="360" height="269" alt=""></div>
+								<div class="art_txt">
+									<div class="art_title">Title 2 Soy eaters may have lower rates</div>
+									<div class="art_date">November 17, 2011</div>
+									<div class="art_info">By Andrew M. Seaman | <a href="javascript:void(0)">Cancer</a>, <a href="javascript:void(0)">Nutrition</a></div>
+									<p>Medicare and Medicaid will cover the cost of infusion associated with Dendreon Corp's prostate cancer vaccine Provenge</p>
+									<div class="art_links">
+										<a href="javascript:void(0)" class="link_comment"><span>20</span>Comments</a>
+										<a href="javascript:void(0)" class="link_more">Read More</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="art_img"><img src="{{MEDIA_URL}}images/media/img_article.gif" width="360" height="269" alt=""></div>
+								<div class="art_txt">
+									<div class="art_title">Title 2 Soy eaters may have lower rates</div>
+									<div class="art_date">November 17, 2011</div>
+									<div class="art_info">By Andrew M. Seaman | <a href="javascript:void(0)">Cancer</a>, <a href="javascript:void(0)">Nutrition</a></div>
+									<p>Medicare and Medicaid will cover the cost of infusion associated with Dendreon Corp's prostate cancer vaccine Provenge</p>
+									<div class="art_links">
+										<a href="javascript:void(0)" class="link_comment"><span>20</span>Comments</a>
+										<a href="javascript:void(0)" class="link_more">Read More</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="art_img"><img src="{{MEDIA_URL}}images/media/img_article.gif" width="360" height="269" alt=""></div>
+								<div class="art_txt">
+									<div class="art_title">Title 2 Soy eaters may have lower rates</div>
+									<div class="art_date">November 17, 2011</div>
+									<div class="art_info">By Andrew M. Seaman | <a href="javascript:void(0)">Cancer</a>, <a href="javascript:void(0)">Nutrition</a></div>
+									<p>Medicare and Medicaid will cover the cost of infusion associated with Dendreon Corp's prostate cancer vaccine Provenge</p>
+									<div class="art_links">
+										<a href="javascript:void(0)" class="link_comment"><span>20</span>Comments</a>
+										<a href="javascript:void(0)" class="link_more">Read More</a>
+									</div>
+								</div>
+							</li>
+						</ul>
+					 </div>-->
+					
+				</div><!--end of cont_col1-->
+				
+				 <div class="cont_col2">
+					<div class="ad1">
+									
+					{% load home_tag %}
+					{% getSponseredLinks Image %}
+				
+					</div>
+				</div><!--end of cont_col2-->
+				
+				<div class="cl"></div>
+			</div><!--end of cont_row-->
+			
+			
+			<div class="title"><h2 class="h_encylopedia"><span>Encyclopedia</span></h2></div>
+			<div class="ency_holder">
+				<ul class="ency_tab">
+					<li class="on"><a href="javascript:void(0)">Conditions &amp; Diseases</a></li>
+					<li><a href="javascript:void(0)">Symptoms</a></li>
+					<li><a href="javascript:void(0)">Injuries</a></li>
+					<li><a href="javascript:void(0)">Poisons</a></li>
+					<li><a href="javascript:void(0)">Tests</a></li>
+					<li><a href="javascript:void(0)">Surgeries &amp; Procedures</a></li>
+					<li><a href="javascript:void(0)">Alternative Medicine</a></li>
+					<li><a href="javascript:void(0)">Nutrition</a></li>
+					<li class="last"><a href="javascript:void(0)">Drugs</a></li>
+				</ul> 
+				 
+				 <!-- <div class="ency_box">-->
+					<!-- <form action="#" class="cate_form">
+					<fieldset>
+						<input type="text" value="" class="input_txt">
+						<input type="submit" value="Search this category " class="input_submit">
+					</fieldset>
+					</form>  
+					
+					<a href="javascript:void(0)" class="btn_browse">Browse A-Z</a>-->
+					
+					<!-- <div class="ency_cate_box">-->
+						{% load encyclopedia_tag %}
+ 						{% getTitleofsubcontents request %} 
+						<!-- <div class="ency_cate_block">
+							<a href="javascript:void(0)">Abnormal heart rhythms</a>
+							<a href="javascript:void(0)">Abnormal menstrual periods</a>
+							<a href="javascript:void(0)">Abnormal vaginal bleeding</a>
+							<a href="javascript:void(0)">ABO incompatibility</a>
+							<a href="javascript:void(0)">Abortion - complete</a>
+						</div>
+						
+						<div class="ency_cate_block">
+							<a href="javascript:void(0)">Anemia </a>
+							<a href="javascript:void(0)">Anencephaly</a>
+							<a href="javascript:void(0)">Aneurysm</a>
+							<a href="javascript:void(0)">Angina</a>
+							<a href="javascript:void(0)">Campylobacter enteritis</a>
+						</div>
+						
+						<div class="ency_cate_block">
+							<a href="javascript:void(0)">Canavan disease</a>
+							<a href="javascript:void(0)">Cancer</a>
+							<a href="javascript:void(0)">Empyema</a>
+							<a href="javascript:void(0)">Encephalitis</a>
+							<a href="javascript:void(0)">Encopresis</a>
+						</div>
+						
+						<div class="ency_cate_block">
+							<a href="javascript:void(0)">Endemic typhus</a>
+							<a href="javascript:void(0)">Endocarditis</a>
+							<a href="javascript:void(0)">Granuloma</a>
+							<a href="javascript:void(0)">Granulopenia</a>
+							<a href="javascript:void(0)">Grass</a>
+						</div>
+						
+						<div class="ency_cate_block last_ency_cate_block">
+							<a href="javascript:void(0)">Graves disease</a>
+							<a href="javascript:void(0)">Grief</a>
+							<a href="javascript:void(0)">Grieving</a>
+							<a href="javascript:void(0)">HIV infection</a>
+							<a href="javascript:void(0)">Hives</a>
+						</div>
+					</div>-->  
+				<!-- </div>--><!--end of ency_box-->
+				
+				
+				<!--<div class="ency_box"
+					box content2
+				</div>--><!--end of ency_box-->
+				
+				<!-- <div class="ency_box">
+					box content3
+				</div>--><!--end of ency_box-->
+				
+				<!-- <div class="ency_box">
+					box content4
+				</div>--><!--end of ency_box-->
+				
+				<!-- <div class="ency_box">
+					box content5
+				</div>--><!--end of ency_box-->
+				
+				<!-- <div class="ency_box">
+					box content6
+				</div>--><!--end of ency_box-->
+				
+				<!-- <div class="ency_box">
+					box content7
+				</div>--><!--end of ency_box-->
+				
+				<!-- <div class="ency_box">
+					box content8
+				</div>--><!--end of ency_box-->
+				
+				<!-- <div class="ency_box">
+					box content9
+				</div>--><!--end of ency_box-->
+				
+			</div><!--end of ency_holder-->
+			
+			
+			<div class="main_content">
+				<div class="main_block">
+					<div class="title_row">
+						<div class="main_title title_forum">Forum Activity</div>
+							<a href="/forum/view-all/" class="btn_view">View Forums</a>
+						<ul class="btns_list" style="clear:both; float:right;margin:-33px 131px 0px 0px; padding:0px 0px 10px 0px">
+							<li class="on" id="most_popular_home">Most Popular<span id="popular_nav_home">&nbsp;</span></li>
+							<!-- <li  id="most_recent_home" onclick="javascript:mostRecentClick();">Most Recent</li> -->
+							<li id="most_recent_home">Most Recent</li>
+						</ul>
+						<!-- <li id="most_recent_home">Most Recent</li>-->
+					</div><!--end of title_row-->
+					
+					<div class="forum_box">
+						<div class="cate_box">
+							<div class="cate_title">Active Categories<span class="view_more" style="margin:9px 0px 0px 0px;clear:both"><a href="/forum/" title="View More Categories"><img src="{{MEDIA_URL}}/images/icon_viewMore.gif"/></a></div>
+							<ul class="cate_list">
+								{% load home_tag %}
+								{% getActiveCategories user_isLogged user_id %}
+							</ul>
+							<span class="view_more_link"><a href="/forum/" title="View More Categories">View More</a></span>
+						</div>
+						<!-- Fouzia Created -->
+						<div id="forum_content">
+						{% load home_tag %}
+						{% getLatestForumContent 'home' user_isLogged user_id %}	
+						
+						</div>				
+					</div><!--end of forum_box-->
+					<!-- -->
+				</div><!--end of main_block-->
+				
+
+				
+				<div class="main_block">
+					<div class="title_row">
+						<div class="main_title title_news">Health News</div>
+							<a href="/news_feed/" class="btn_view"  target="_blank">View All News</a>
+						<ul class="btns_list">
+							<!-- <li><a href="javascript:void(0)">Most Popular<span>&nbsp;</span></a></li>
+							<li class="on"><a>Most Recent<span>&nbsp;</span></a></li> -->
+						</ul>
+					</div><!--end of title_row-->
+
+					
+					<div class="news_box">
+						{% include "vertical_summarized_two.html" %}
+						
+						<!-- <div class="news_block1">
+							<div class="news_img"><img src="{{MEDIA_URL}}images/media/img_news1.gif" alt=""></div>
+							<div class="news_title"><a href="javascript:void(0)">Soy eaters may have lower rates of lung cancer</a></div>
+							<div class="news_infor"><span>November 17, 2011</span> By Andrew M. Seaman - Cancer</div>
+							<p>Medicare and Medicaid will cover the cost of infusion associated with Dendreon Corp's prostate cancer vaccine Provenge,company said on Monday.</p>
+							<div class="news_links">
+								<a class="link_comment" href="javascript:void(0)"><span>20</span>Comments</a>
+								<a class="link_more" href="javascript:void(0)">Read More</a>
+							</div>
+						</div><!--end of news_block1-->
+						
+						<div class="news_block2_holder">
+						{% include "vertical_preview_two.html" %}
+<!-- 							<div class="news_block2">
+								<div class="news_img"><img src="{{MEDIA_URL}}images/media/img_news2.gif" alt=""></div>
+								<div class="news_title"><a href="javascript:void(0)">Cholesterol drugs safe, even after a decade of use</a></div>
+								<p>November 22, 2011</p>
+							</div>end of news_block2
+
+							<div class="news_block2 news_block2_last">
+								<div class="news_img"><img src="{{MEDIA_URL}}images/media/img_news2.gif" alt=""></div>
+								<div class="news_title"><a href="javascript:void(0)">Cholesterol drugs safe, even after a decade of use</a></div>
+								<p>November 22, 2011</p>
+							</div>end of news_block2 -->
+						</div><!--end of news_block2_holder-->
+						
+					</div><!--end of news_box-->
+				</div><!--end of main_block-->
+				
+				<div class="ad3">
+				
+					{% getSponseredLinks Banner2 %}
+				
+				</div>
+							
+				<!--<div class="main_block">
+					<div class="title_row">
+						<div class="main_title title_video">Videos</div>
+						<a href="javascript:void(0)" class="btn_view">View All Videos</a>
+						<ul class="btns_list">
+							<li class="on"><a href="javascript:void(0)">Most Popular<span>&nbsp;</span></a></li>
+							<li><a href="javascript:void(0)">Most Recent<span>&nbsp;</span></a></li>
+						</ul>
+					</div><!--end of title_row-->
+					
+					<!--<div class="video_box">
+					<ul>
+						<li>
+							<div class="video_img"><img src="{{MEDIA_URL}}images/media/video_img.gif" alt=""><span></span></div>
+							<div class="video_time">3:45</div>
+							<div class="video_title"><a href="javascript:void(0)">After your child's ear tube surgery</a></div>
+						</li>
+						<li>
+							<div class="video_img"><img src="{{MEDIA_URL}}images/media/video_img.gif" alt=""><span></span></div>
+							<div class="video_time">3:45</div>
+							<div class="video_title"><a href="javascript:void(0)">After your child's ear tube surgery</a></div>
+						</li>
+						<li>
+							<div class="video_img"><img src="{{MEDIA_URL}}images/media/video_img.gif" alt=""><span></span></div>
+							<div class="video_time">3:45</div>
+							<div class="video_title"><a href="javascript:void(0)">After your child's ear tube surgery</a></div>
+						</li>
+						<li>
+							<div class="video_img"><img src="{{MEDIA_URL}}images/media/video_img.gif" alt=""><span></span></div>
+							<div class="video_time">3:45</div>
+							<div class="video_title"><a href="javascript:void(0)">After your child's ear tube surgery</a></div>
+						</li>
+					</ul>
+					</div>
+				</div> --><!--end of main_block-->
+			</div><!--end of main_content-->
+			
+			<div class="sidebar">
+				<div class="user_box">
+					<div class="user_title">Newest Users</div>
+					<div class="user_block">
+					
+						<ul class="user_list">
+							{% load home_tag %}
+	 						{% getNewestUser %}
+						</ul>
+
+					</div>
+				</div><!--end of user_box-->
+				
+					<div class="ad2">
+				
+						{% getSponseredLinks Banner1 %}
+								
+					</div>
+				
+			</div><!--end of sidebar-->
+				
+			<br class="cl">
+			<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+		</div><!--end of content-->
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% load feeds_tags %}
+{% parse_feed items 4 %}
+
+	{% for item in items.news_items %}
+		{% load math_tags_filters %}
+		{% if forloop.counter|is_greater_than:2 %}
+			<a href="/read_news/{{item.id}}/" target="_blank">
+			<div class="news_block2">
+			{% comment %}
+				<div class="news_img"><img src="{{MEDIA_URL}}images/media/news1.png" alt=""></div>
+			{% endcomment %}
+				<div class="news_title"><a href="/read_news/{{item.id}}/" target="_blank">{{item.title}}</a></div>
+				<p>{{item.date}}</p>
+			<br>
+			<div class="news_links">
+				<!-- <a class="link_comment" href="javascript:void(0)"><span>20</span>Comments</a> -->
+				<a class="link_more" href="/read_news/{{item.id}}/" style="float:left" target="_blank">Read More</a>
+			</div>
+			</div>
+			</a>
+		{% endif %}
+	{% endfor %}

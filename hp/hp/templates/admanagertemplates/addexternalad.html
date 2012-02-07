@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>Add External Ad</title>
+</head>
+<body>
+	<h3>Add External Ad</h3>
+	{% if errors %}
+	<ul>
+		{% for error in errors %}
+		<li>{{ error }}</li> {% endfor %}
+	</ul>
+	{% endif %}
+	<form action="" method="post">
+		{% csrf_token %}
+		<table>{{ form.as_table }}
+		</table>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+			type="submit" value="Create">
+	</form>
+	<form action="/admanager/" method="LINK">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+			type="submit" value="Back To Ad Manager"></br> </br>
+	</form>
+</body>
+</html>

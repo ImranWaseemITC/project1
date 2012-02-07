@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>Delete Ads</title>
+</head>
+<body>
+<h3>Delete Ads</h3>
+{{error}}
+<form action="" method="post">{% csrf_token %}
+   <table>
+    <tr>Internal Ads</tr><tr><td><div style="overflow: auto; height : 150px;">
+      {{ form.internalad_id }}
+    </div></td></tr>
+  </table>  
+  <table>
+    <tr>External Ads</tr><tr><td><div style="overflow: auto; height : 150px;">
+      {{ form.externalad_id }}
+    </div></td></tr>
+    <tr><td ><input type="submit" value="Delete"/></td></tr>
+  </table>  
+</form>
+<form action="/admanager/" method="LINK">
+&nbsp;<input type="submit" value="Back To Ad-Manager"></br></br>
+</form>
+</body>
+</html>
